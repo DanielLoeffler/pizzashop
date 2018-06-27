@@ -31,4 +31,5 @@ To deploy the application WAR on the specified Tomcat, use:
 ## Test the endpoints:
 - http://localhost:8080/test/hello (Hello Servlet)
 - http://localhost:8080/test/example (Request Info Servlet)
+- http://localhost:8080/test/movie (Example Servlet with Freemarker)
 - http://localhost:8080/test/api/weather (Web service)

@@ -19,7 +19,7 @@ To build the application with Gradle:
 
 	gradle
 
-# Deploy the application (Cargo plugin)
+# Run / deploy the application
 
 ## Local (project)
 The following command will download (`container/download`), extract (`container/extract`) and start a local Tomcat container, and also deploy the application:

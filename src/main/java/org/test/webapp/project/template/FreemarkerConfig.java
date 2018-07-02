@@ -12,7 +12,7 @@ import java.util.Locale;
 /**
  * Freemarker configuration
  *
- * @author wap
+ * @author pwalser
  * @since 27.06.2018
  */
 public class FreemarkerConfig {
@@ -22,10 +22,10 @@ public class FreemarkerConfig {
     public FreemarkerConfig() {
 
         config = new Configuration();
-        config.setClassForTemplateLoading(getClass(), "/");
-        config.setIncompatibleImprovements(new Version(2, 3, 20));
         config.setDefaultEncoding("UTF-8");
         config.setLocale(Locale.getDefault());
+        config.setClassForTemplateLoading(getClass(), "/templates");
+        config.setIncompatibleImprovements(new Version(2, 3, 20));
         config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
     }
 

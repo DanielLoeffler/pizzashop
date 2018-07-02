@@ -12,10 +12,10 @@ import java.security.Principal;
 import java.util.Enumeration;
 
 /**
- * Example servlet
+ * Info servlet - prints request information
  */
-@WebServlet("/example")
-public class ExampleServlet extends HttpServlet {
+@WebServlet("/info")
+public class InfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {

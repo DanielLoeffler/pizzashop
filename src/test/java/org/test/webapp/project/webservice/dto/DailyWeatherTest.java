@@ -2,6 +2,7 @@ package org.test.webapp.project.webservice.dto;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.test.webapp.project.util.JsonUtil;
 import org.test.webapp.project.webservice.dto.type.WeatherCondition;
 
 import java.time.LocalDate;

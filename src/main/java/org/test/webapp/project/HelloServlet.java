@@ -30,6 +30,5 @@ public class HelloServlet extends HttpServlet {
         writer.write("Current time is: " + LocalDateTime.now());
         writer.write("</body>");
         writer.write("</html>");
-        writer.flush();
     }
 }

@@ -1,7 +1,8 @@
-package org.test.webapp.project.template;
+package org.test.webapp.project;
 
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import org.test.webapp.project.template.FreemarkerConfig;
 import org.test.webapp.project.template.model.Movie;
 
 import javax.servlet.ServletException;
@@ -13,10 +14,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Hello servlet
+ * Template servlet - uses Freemarker to render a data model with a freemarker template (*.ftl)
  */
-@WebServlet("/movie")
-public class MovieServlet extends HttpServlet {
+@WebServlet("/template")
+public class TemplateServlet extends HttpServlet {
 
     private Template template;
 

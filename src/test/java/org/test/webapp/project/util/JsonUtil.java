@@ -1,4 +1,4 @@
-package org.test.webapp.project.webservice.dto;
+package org.test.webapp.project.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.test.webapp.project.webservice.config.ObjectMapperContextResolver;

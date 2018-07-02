@@ -123,6 +123,7 @@ task deploy (dependsOn: ['clean', 'build', 'cargoRedeployRemote']) {
 }
 
 task run (dependsOn: ['clean', 'build', 'cargoRunLocal']) {
+    logging.captureStandardOutput LogLevel.INFO
     group = 'Deploy'
     description = 'Build the WAR and deploy it to a local Tomcat installation'
 }

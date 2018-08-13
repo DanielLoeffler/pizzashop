@@ -25,7 +25,7 @@ public class HelloServlet extends HttpServlet {
                 "<head>\n" +
                 "\t<meta charset=\"utf-8\">\n" +
                 "\t\t<title>\n" +
-                "\t\t\tPizzeria HTML\n" +
+                "\t\t\tPizzashop HTML\n" +
                 "\t\t</title>\n" +
                 "\t<link rel=\"stylesheet\" type=\"text/css\" href=\"Pizza.css\">\n" +
                 "</head>\n" +

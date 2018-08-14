@@ -5,11 +5,28 @@ buildscript {
 
     dependencies {
         classpath 'com.bmuschko:gradle-cargo-plugin:2.3'
+        //testCompile "junit:junit:4.12"
+        //compile 'mysql:mysql-connector-java:5.1.6'
     }
 }
 
+/*
+sourceSets {
+    main { output.resourcesDir = output.classesDir }
+    test { output.resourcesDir = output.classesDir }
+}
+jar { duplicatesStrategy = 'exclude' }
+
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+*/
+
+
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
+//apply plugin: 'java'
 
 defaultTasks 'clean', 'build'
 

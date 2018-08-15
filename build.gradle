@@ -1,32 +1,9 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-
-    dependencies {
-        classpath 'com.bmuschko:gradle-cargo-plugin:2.3'
-        //testCompile "junit:junit:4.12"
-        //compile 'mysql:mysql-connector-java:5.1.6'
-    }
-}
-
-/*
-sourceSets {
-    main { output.resourcesDir = output.classesDir }
-    test { output.resourcesDir = output.classesDir }
-}
-jar { duplicatesStrategy = 'exclude' }
-
-compileJava.options.encoding = 'UTF-8'
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
-}
-*/
-
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 apply plugin: 'war'
 apply plugin: 'com.bmuschko.cargo'
-//apply plugin: 'java'
+apply plugin: 'java'
 
 defaultTasks 'clean', 'build'
 
@@ -46,8 +23,8 @@ tasks.withType(JavaCompile) {
     options.encoding = 'UTF-8'
 }
 
-def dateTimeFormat = java.time.format.DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-def buildDate = java.time.LocalDateTime.now()
+def dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+def buildDate = LocalDateTime.now()
 
 war {
     archiveName 'webapp-project.war'
@@ -94,6 +71,9 @@ ext.libs = [
 
 
 dependencies {
+
+    compile "mysql-connector-java:5.1.6"
+
     cargo libs.cargo
 
     providedCompile libs.jee
@@ -103,6 +83,11 @@ dependencies {
     compile libs.freemarker
     compile libs.loggingAPI
     runtime libs.loggingImpl
+
+
+
+    classpath 'com.bmuschko:gradle-cargo-plugin:2.3'
+    compile 'mysql:mysql-connector-java:5.1.6'
 
     testCompile libs.junit
 }
@@ -114,7 +99,7 @@ mkdir(confDir)
 cargo {
 
     containerId = 'tomcat9x'
-    port = Integer.valueOf(project.property('tomcat.port'))
+    port = Integer.valueOf(project.property('tomcat.port') as String)
 
     deployable {
         context = 'test'

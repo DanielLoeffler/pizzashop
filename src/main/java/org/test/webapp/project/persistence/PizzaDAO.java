@@ -22,7 +22,7 @@ public class PizzaDAO {
     }
 
     /**
-     * Return a list of all persons.
+     * Return a list of all pizzas.
      */
     public List<Pizza> getPizzas() throws Exception {
         List<Pizza> pizzas = new ArrayList<>();

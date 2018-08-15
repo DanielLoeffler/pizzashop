@@ -1,7 +1,6 @@
 package org.test.webapp.project.persistence;
 
 import org.test.webapp.project.dto.Order;
-import org.test.webapp.project.dto.Pizza;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -73,7 +72,7 @@ public class OrderDAO {
     public void create(Order order) {
 
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("insert into bestekkung (id, date, phone, address) values(" + order.getId() + ", " + order.getDate() + ", " + order.getPhone() + ", "+order.getPhone()+");");
+            statement.executeUpdate("insert into bestellung (id, date, phone, address) values(" + order.getId() + ", " + order.getDate() + ", " + order.getPhone() + ", "+order.getPhone()+");");
 
         } catch (SQLException e) {
             System.out.println("Fehlre beim Erstellen der Order: " + e.getMessage());
@@ -104,7 +103,5 @@ public class OrderDAO {
             System.out.println("Fehler beim Löschen der order: "+e.getMessage());
         }
     }
-
-
 
 }

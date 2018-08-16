@@ -1,7 +1,5 @@
 package org.test.webapp.project;
 
-import org.test.webapp.project.persistence.PizzaDAO;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;

@@ -33,7 +33,7 @@ public class HelloServlet extends HttpServlet {
                 "\t<h1>Pizzeria HTML</h1>\n" +
                 "</a><br>\n" +
                 "<br>\n" +
-                "Pizza lieferung:\n" +
+                "Pizza lieferungen:\n" +
                 "<a href=\"Pizza Bestellen.html\">\n" +
                 "bitte hier klicken um Die bestellung zu machen.<br>\n" +
                 "</a><br>\n" +

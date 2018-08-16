@@ -2,10 +2,7 @@ package org.test.webapp.project.persistence;
 
 import org.test.webapp.project.dto.Pizza;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +45,15 @@ public class PizzaDAOJdbc implements PizzaDAO {
     @Override
     public Pizza getPizzaByID(int id) {
         Pizza pizza = null;
+
+        /*
+        int idnum = request.getParameter("pizzaDAO");
+        int query = "select * from pizza where id = ? ;";
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1,idnum);
+        ResultSet resultSet= preparedStatement.executeQuery();
+        */
 
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("select * from pizza where id = " + id + ";");

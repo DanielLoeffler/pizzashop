@@ -1,4 +1,4 @@
 package org.test.webapp.project.service;
 
-public class PizzaService {
+public interface PizzaService {
 }

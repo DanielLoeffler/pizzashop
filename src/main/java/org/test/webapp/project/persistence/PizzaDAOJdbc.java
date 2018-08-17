@@ -46,17 +46,14 @@ public class PizzaDAOJdbc implements PizzaDAO {
     public Pizza getPizzaByID(int id) {
         Pizza pizza = null;
 
-        /*
-        int idnum = request.getParameter("pizzaDAO");
-        int query = "select * from pizza where id = ? ;";
+         String query = "select * from pizza where id = ? ;";
 
-        PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setInt(1,idnum);
-        ResultSet resultSet= preparedStatement.executeQuery();
-        */
+         // PreparedStatement preparedStatement = connection.prepareStatement(query);
+         // preparedStatement.setInt(query,idnum);
 
-        try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from pizza where id = " + id + ";");
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            ResultSet resultSet= preparedStatement.executeQuery();
+            preparedStatement.setInt(1,id);
 
             int tempID = resultSet.getInt("id");
             String name = resultSet.getString("name");
@@ -72,7 +69,7 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
     /**
      * Create a new pizza.
-     */
+
     @Override
     public void create(Pizza pizza) {
 
@@ -83,10 +80,28 @@ public class PizzaDAOJdbc implements PizzaDAO {
             System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
         }
     }
+    */
+
+    @Override
+    public void create(Pizza pizza) {
+
+        String query = "insert into pizza (id, name, price) values( ? , ? , ? );";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+            preparedStatement.setInt(1,pizza.getId());
+            preparedStatement.setString(2,pizza.getName());
+            preparedStatement.setDouble(3,pizza.getPrice());
+
+        } catch (SQLException e) {
+            System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
+        }
+    }
+
 
     /**
      * Update a pizza
-     */
+
     @Override
     public void update(Pizza pizza, int id) {
 
@@ -97,15 +112,53 @@ public class PizzaDAOJdbc implements PizzaDAO {
         }
 
     }
+    */
+
+    @Override
+    public void update(Pizza pizza, int id) {
+
+        String query = "update pizza set id= ? , name= ? , price= ?  where id= ? ;";
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+            preparedStatement.setInt(1,pizza.getId());
+            preparedStatement.setString(2,pizza.getName());
+            preparedStatement.setDouble(3,pizza.getPrice());
+            preparedStatement.setInt(4,id);
+
+
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Update der Pizza: "+e.getMessage());
+        }
+
+    }
+
+
+
 
     /**
      * Delete a pizza by id.
-     */
+
     @Override
     public void delete(int id)  {
 
         try(Statement statement=connection.createStatement()) {
             statement.executeUpdate("delete from pizza where id="+id+";");
+        } catch (SQLException e) {
+            System.out.println("Fehler beim Löschen der Pizza: "+e.getMessage());
+        }
+    }
+    */
+
+    @Override
+    public void delete(int id)  {
+
+        String query = "delete from pizza where id= ? ;";
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+            preparedStatement.setInt(1,id);
+
         } catch (SQLException e) {
             System.out.println("Fehler beim Löschen der Pizza: "+e.getMessage());
         }

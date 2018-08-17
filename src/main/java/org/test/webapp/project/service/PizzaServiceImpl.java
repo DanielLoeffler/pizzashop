@@ -1,10 +1,16 @@
 package org.test.webapp.project.service;
 
-import java.sql.Connection;
+
+import org.test.webapp.project.persistence.PizzaDAO;
 
 public class PizzaServiceImpl {
 
-    private Connection connection;
+    private PizzaDAO pizzaDAO;
+
+    public int idToInt(String x) {
+        int id=Integer.parseInt(x);
+        return id;
+    }
 
 
 }

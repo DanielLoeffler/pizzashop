@@ -18,11 +18,15 @@ public class PizzaServlet extends HttpServlet{
         protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
             PrintWriter writer = new PrintWriter(resp.getWriter());
-/*
-            PizzaDAO pizzaDAO = new PizzaDAOJdbc();
 
-            pizzaDAO.create(5, request );
-*/
+
+            String id=req.getParameter("idanzahl");
+
+
+            //PizzaDAO pizzaDAO = new PizzaDAOJdbc();
+
+            //pizzaDAO.create();
+
             writer.write("<!DOCTYPE html>\n" +
                     "<html>\n" +
                     "<head>\n" +
@@ -38,7 +42,7 @@ public class PizzaServlet extends HttpServlet{
                     "</a><br>\n" +
                     "<br>\n" +
                     "Pizza lieferung:\n" +
-                    "<a href=\"Pizza Bestellen.html\">\n" +
+                    "<a href=\"https://www.dieci.ch/de/\">\n" +
                     "bitte hier klicken um Die bestellung zu machen.<br>\n" +
                     "</a><br>\n" +
                     "Zur auswahl stehen folgende Sorten mit dem Preis für die Kleine Pizza\n" +
@@ -46,7 +50,9 @@ public class PizzaServlet extends HttpServlet{
                     "<br>\n" +
                     "<button type=\"button\">show all</button>\n" +
                     "<br>\n" +
+                    "<br>\n" +
                     "show Pizza <form><label for=\"idanzahl\">Nummer: <input id=\"idanzahl\" name=\"idanzahl\"></label></form>" +
+                    "<br>\n" +
                     "<br>\n" +
                     "<table>\n" +
                     "\t<tr>\n" +

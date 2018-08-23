@@ -46,21 +46,23 @@ public class PizzaDAOJdbc implements PizzaDAO {
     public Pizza getPizzaByID(int id) {
         Pizza pizza = null;
 
-         String query = "select * from pizza where id = ? ;";
+        String query = "select * from pizza where id = ? ;";
 
-         // PreparedStatement preparedStatement = connection.prepareStatement(query);
-         // preparedStatement.setInt(query,idnum);
+        // PreparedStatement preparedStatement = connection.prepareStatement(query);
+        // preparedStatement.setInt(query,idnum);
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            ResultSet resultSet= preparedStatement.executeQuery();
-            preparedStatement.setInt(1,id);
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            int tempID = resultSet.getInt("id");
-            String name = resultSet.getString("name");
-            Double price = resultSet.getDouble("price");
-
-            pizza = new Pizza(tempID, name, price);
+            if (resultSet.next()) {
+                int tempID = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                Double price = resultSet.getDouble("price");
+                pizza = new Pizza(tempID, name, price);
+            }
         } catch (SQLException e) {
+            e.printStackTrace();
             System.out.println("Pizza wurde nicht gefunden: " + e.getMessage());
         }
 
@@ -69,18 +71,17 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
     /**
      * Create a new pizza.
-
-    @Override
-    public void create(Pizza pizza) {
-
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("insert into pizza (id, name, price) values(" + pizza.getId() + ", " + pizza.getName() + ", " + pizza.getPrice() + ");");
-
-        } catch (SQLException e) {
-            System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
-        }
-    }
-    */
+     *
+     * @Override public void create(Pizza pizza) {
+     * <p>
+     * try (Statement statement = connection.createStatement()) {
+     * statement.executeUpdate("insert into pizza (id, name, price) values(" + pizza.getId() + ", " + pizza.getName() + ", " + pizza.getPrice() + ");");
+     * <p>
+     * } catch (SQLException e) {
+     * System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
+     * }
+     * }
+     */
 
     @Override
     public void create(Pizza pizza) {
@@ -88,10 +89,10 @@ public class PizzaDAOJdbc implements PizzaDAO {
         String query = "insert into pizza (id, name, price) values( ? , ? , ? );";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, pizza.getId());
+            preparedStatement.setString(2, pizza.getName());
+            preparedStatement.setDouble(3, pizza.getPrice());
             preparedStatement.executeUpdate();
-            preparedStatement.setInt(1,pizza.getId());
-            preparedStatement.setString(2,pizza.getName());
-            preparedStatement.setDouble(3,pizza.getPrice());
 
         } catch (SQLException e) {
             System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
@@ -101,66 +102,61 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
     /**
      * Update a pizza
-
-    @Override
-    public void update(Pizza pizza, int id) {
-
-        try(Statement statement=connection.createStatement()) {
-            statement.executeUpdate("update pizza set id="+pizza.getId()+", name="+pizza.getName()+", price="+pizza.getPrice()+" where id="+id+";");
-        } catch (SQLException e) {
-            System.out.println("Fehler beim Update der Pizza: "+e.getMessage());
-        }
-
-    }
-    */
+     *
+     * @Override public void update(Pizza pizza, int id) {
+     * <p>
+     * try(Statement statement=connection.createStatement()) {
+     * statement.executeUpdate("update pizza set id="+pizza.getId()+", name="+pizza.getName()+", price="+pizza.getPrice()+" where id="+id+";");
+     * } catch (SQLException e) {
+     * System.out.println("Fehler beim Update der Pizza: "+e.getMessage());
+     * }
+     * <p>
+     * }
+     */
 
     @Override
     public void update(Pizza pizza, int id) {
 
         String query = "update pizza set id= ? , name= ? , price= ?  where id= ? ;";
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, pizza.getId());
+            preparedStatement.setString(2, pizza.getName());
+            preparedStatement.setDouble(3, pizza.getPrice());
+            preparedStatement.setInt(4, id);
             preparedStatement.executeUpdate();
-            preparedStatement.setInt(1,pizza.getId());
-            preparedStatement.setString(2,pizza.getName());
-            preparedStatement.setDouble(3,pizza.getPrice());
-            preparedStatement.setInt(4,id);
-
 
         } catch (SQLException e) {
-            System.out.println("Fehler beim Update der Pizza: "+e.getMessage());
+            System.out.println("Fehler beim Update der Pizza: " + e.getMessage());
         }
 
     }
-
-
 
 
     /**
      * Delete a pizza by id.
+     *
+     * @Override public void delete(int id)  {
+     * <p>
+     * try(Statement statement=connection.createStatement()) {
+     * statement.executeUpdate("delete from pizza where id="+id+";");
+     * } catch (SQLException e) {
+     * System.out.println("Fehler beim Löschen der Pizza: "+e.getMessage());
+     * }
+     * }
+     */
 
     @Override
-    public void delete(int id)  {
-
-        try(Statement statement=connection.createStatement()) {
-            statement.executeUpdate("delete from pizza where id="+id+";");
-        } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der Pizza: "+e.getMessage());
-        }
-    }
-    */
-
-    @Override
-    public void delete(int id)  {
+    public void delete(int id) {
 
         String query = "delete from pizza where id= ? ;";
 
-        try(PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
-            preparedStatement.setInt(1,id);
 
         } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der Pizza: "+e.getMessage());
+            System.out.println("Fehler beim Löschen der Pizza: " + e.getMessage());
         }
     }
 

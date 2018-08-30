@@ -1,5 +1,6 @@
 package org.test.webapp.project.web;
 
+import org.test.webapp.project.dto.Pizza;
 import org.test.webapp.project.service.PizzaServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
@@ -20,9 +21,20 @@ public class PizzaServlet extends HttpServlet {
 
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
-        String id = req.getParameter("idanzahl");
-        int idInt = 0;
+
+
+        String id = req.getParameter("idzahl");
+        String idcreat = req.getParameter("idcreat");
+        String namecreat = req.getParameter("namecreat");
+        String pricecreat = req.getParameter("pricecreat");
+
+
+        int idInt=0;
+        int idCreatInt=0;
+        double priceCreatDouble=0;
         String pizzaString = "hallo";
+        String creatPizzaString = "Hallo";
+        String nameCreatString="";
 
         if (id != null) {
             try {
@@ -39,6 +51,43 @@ public class PizzaServlet extends HttpServlet {
         }else {
             pizzaString="Keine Negativen IDs.";
         }
+
+
+        if (idcreat != null) {
+            try {
+                idCreatInt = pizzaService.idToInt(id);
+            } catch (NumberFormatException e) {
+                creatPizzaString = "Keine Zahl eingegeben.";
+            }
+        }
+
+
+        if(namecreat!=null){
+            try {
+                nameCreatString = namecreat;
+            } catch (NumberFormatException e) {
+                creatPizzaString = "Keinen Namen eingegeben.";
+            }
+        }
+
+
+
+        if(pricecreat != null) {
+            try {
+                priceCreatDouble = pizzaService.priceToDouble(pricecreat);
+            } catch (NumberFormatException e) {
+                creatPizzaString = "Keinen Double eingegeben.";
+            }
+        }
+
+
+        if(idCreatInt>0 && nameCreatString!=null && priceCreatDouble>0){
+            Pizza p=pizzaService.crreatPizza(idCreatInt, nameCreatString, priceCreatDouble);
+            creatPizzaString=p.toString();
+        }else{
+            creatPizzaString= "Fehler beim erstellen der neuen Pizza.";
+        }
+
 
 
         writer.write("<!DOCTYPE html>\n" +
@@ -59,16 +108,28 @@ public class PizzaServlet extends HttpServlet {
                 "<a href=\"https://www.dieci.ch/de/\">\n" +
                 "bitte hier klicken um Die bestellung zu machen.<br>\n" +
                 "</a><br>\n" +
-                "Zur auswahl stehen folgende Sorten mit dem Preis für die Kleine Pizza\n" +
+                "Zur auswahl stehen folgende Sorten mit dem Preis f&uumlr die Kleine Pizza\n" +
                 "<br>\n" +
                 "<br>\n" +
                 "<button type=\"button\">show all</button>\n" +
                 "<br>\n" +
                 "<br>\n" +
-                "show Pizza <form><label for=\"idanzahl\">Nummer: <input id=\"idanzahl\" name=\"idanzahl\"></label></form>" +
+                "show Pizza <form><label for=\"idzahl\">Nummer: <input id=\"idzahl\" name=\"idzahl\"></label></form>" +
                 "<br>\n" +
                 "<br>\n" +
                 pizzaString +
+                "<br>\n" +
+                "<br>\n" +
+                "<form> creat<label for=\"idcreat\">Id: <input id=\"idcreat\" name=\"idcreat\"></label>" +
+                "<br>\n" +
+                "<br>\n" +
+                "creat <label for=\"namecreat\">Name: <input id=\"namecreat\" name=\"namecreat\"></label>" +
+                "<br>\n" +
+                "<br>\n" +
+                "creat <label for=\"pricecreat\">Price: <input id=\"pricecreat\" name=\"pricecreat\"></label></form>" +
+                "<br>\n" +
+                "<br>\n" +
+                creatPizzaString+
                 "<br>\n" +
                 "<br>\n" +
                 "<table>\n" +

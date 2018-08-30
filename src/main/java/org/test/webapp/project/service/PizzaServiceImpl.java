@@ -33,13 +33,18 @@ public class PizzaServiceImpl {
 
     public double priceToDouble(String x){
         double price= Double.parseDouble(x);
+        pizza.setPrice(price);
         return price;
     }
 
 
-    public Pizza crreatPizza(int id, String name, Double price){
+    public Pizza crreatePizza(int id, String name, Double price){
         pizza = new Pizza(id, name, price);
         return pizza;
+    }
+
+    public void makePizza(Pizza pizza) {
+        pizzaDAO.create(pizza);
     }
 
 }

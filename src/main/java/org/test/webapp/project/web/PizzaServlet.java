@@ -24,17 +24,17 @@ public class PizzaServlet extends HttpServlet {
 
 
         String id = req.getParameter("idzahl");
-        String idcreat = req.getParameter("idcreat");
-        String namecreat = req.getParameter("namecreat");
-        String pricecreat = req.getParameter("pricecreat");
+        String idcreate = req.getParameter("idcreate");
+        String namecreate = req.getParameter("namecreate");
+        String pricecreate = req.getParameter("pricecreate");
 
 
         int idInt=0;
-        int idCreatInt=0;
-        double priceCreatDouble=0;
+        int idCreateInt=0;
+        double priceCreateDouble=0;
         String pizzaString = "hallo";
-        String creatPizzaString = "Hallo";
-        String nameCreatString="";
+        String createPizzaString = "Hallo";
+        String nameCreateString="";
 
         if (id != null) {
             try {
@@ -53,39 +53,40 @@ public class PizzaServlet extends HttpServlet {
         }
 
 
-        if (idcreat != null) {
+        if (idcreate != null) {
             try {
-                idCreatInt = pizzaService.idToInt(id);
+                idCreateInt = pizzaService.idToInt(id);
             } catch (NumberFormatException e) {
-                creatPizzaString = "Keine Zahl eingegeben.";
+                createPizzaString = "Keine Zahl eingegeben.";
             }
         }
 
 
-        if(namecreat!=null){
+        if(namecreate!=null){
             try {
-                nameCreatString = namecreat;
+                nameCreateString = namecreate;
             } catch (NumberFormatException e) {
-                creatPizzaString = "Keinen Namen eingegeben.";
+                createPizzaString = "Keinen Namen eingegeben.";
             }
         }
 
 
 
-        if(pricecreat != null) {
+        if(pricecreate != null) {
             try {
-                priceCreatDouble = pizzaService.priceToDouble(pricecreat);
+                priceCreateDouble = pizzaService.priceToDouble(pricecreate);
             } catch (NumberFormatException e) {
-                creatPizzaString = "Keinen Double eingegeben.";
+                createPizzaString = "Keinen Double eingegeben.";
             }
         }
 
 
-        if(idCreatInt>0 && nameCreatString!=null && priceCreatDouble>0){
-            Pizza p=pizzaService.crreatPizza(idCreatInt, nameCreatString, priceCreatDouble);
-            creatPizzaString=p.toString();
+        if(idCreateInt>0 && nameCreateString!=null && priceCreateDouble>0){
+            Pizza p=pizzaService.crreatePizza(idCreateInt, nameCreateString, priceCreateDouble);
+            createPizzaString=p.toString();
+            pizzaService.makePizza(p);
         }else{
-            creatPizzaString= "Fehler beim erstellen der neuen Pizza.";
+            createPizzaString= "Fehler beim erstellen der neuen Pizza.";
         }
 
 
@@ -120,16 +121,16 @@ public class PizzaServlet extends HttpServlet {
                 pizzaString +
                 "<br>\n" +
                 "<br>\n" +
-                "<form> creat<label for=\"idcreat\">Id: <input id=\"idcreat\" name=\"idcreat\"></label>" +
+                "<form> creat<label for=\"idcreate\">Id: <input id=\"idcreate\" name=\"idcreate\"></label>" +
                 "<br>\n" +
                 "<br>\n" +
-                "creat <label for=\"namecreat\">Name: <input id=\"namecreat\" name=\"namecreat\"></label>" +
+                "creat <label for=\"namecreate\">Name: <input id=\"namecreate\" name=\"namecreate\"></label>" +
                 "<br>\n" +
                 "<br>\n" +
-                "creat <label for=\"pricecreat\">Price: <input id=\"pricecreat\" name=\"pricecreat\"></label></form>" +
+                "creat <label for=\"pricecreate\">Price: <input id=\"pricecreate\" name=\"pricecreate\"></label></form>" +
                 "<br>\n" +
                 "<br>\n" +
-                creatPizzaString+
+                createPizzaString+
                 "<br>\n" +
                 "<br>\n" +
                 "<table>\n" +

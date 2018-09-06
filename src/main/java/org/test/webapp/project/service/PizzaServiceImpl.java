@@ -10,6 +10,7 @@ public class PizzaServiceImpl {
 
     private PizzaDAO pizzaDAO;
     Pizza pizza =new Pizza();
+    private double price;
 
     public PizzaServiceImpl() {
         this.pizzaDAO = new PizzaDAOJdbc();
@@ -31,9 +32,18 @@ public class PizzaServiceImpl {
     }
 
 
+    public Pizza getPizza() {
+        return pizza;
+    }
+
+
     public double priceToDouble(String x){
-        double price= Double.parseDouble(x);
+        price= Double.parseDouble(x);
         pizza.setPrice(price);
+        return price;
+    }
+
+    public double getPrice(){
         return price;
     }
 
@@ -46,5 +56,6 @@ public class PizzaServiceImpl {
     public void makePizza(Pizza pizza) {
         pizzaDAO.create(pizza);
     }
+
 
 }

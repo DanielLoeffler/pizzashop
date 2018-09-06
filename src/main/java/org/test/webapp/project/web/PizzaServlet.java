@@ -1,7 +1,14 @@
 package org.test.webapp.project.web;
 
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateExceptionHandler;
+import freemarker.template.Version;
 import org.test.webapp.project.dto.Pizza;
+import org.test.webapp.project.service.PizzaService;
 import org.test.webapp.project.service.PizzaServiceImpl;
+import org.testng.Assert;
+import org.testng.annotations.Test;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,17 +16,61 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 @WebServlet("/pizzashop")
 public class PizzaServlet extends HttpServlet {
 
 
+
+    private Configuration configuration() {
+        Configuration config = new Configuration();
+        config.setDefaultEncoding("UTF-8");
+        config.setLocale(Locale.getDefault());
+        config.setClassForTemplateLoading(getClass(), "/templates");
+        config.setIncompatibleImprovements(new Version(2, 3, 20));
+        config.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
+        return config;
+    }
+
+
+    @Test
+    public void pizzashop() throws Exception {
+
+
+        Template template = configuration().getTemplate("pizzashop.ftl");
+
+        PizzaServiceImpl pizzaService=new PizzaServiceImpl();
+        String pizzaString=pizzaService.getPizza().toString();
+
+
+        //double price=pizzaService.getPrice();
+
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("pizzaString", pizzaString);
+        model.put("createPizzaString", "F");
+
+
+        StringWriter writer = new StringWriter();
+        template.process(model, writer);
+
+        Assert.assertEquals("Hello World", writer.toString());
+    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        resp.setContentType("text/html");
 
         PrintWriter writer = new PrintWriter(resp.getWriter());
 
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
+
+
 
 
 
@@ -29,12 +80,12 @@ public class PizzaServlet extends HttpServlet {
         String pricecreate = req.getParameter("pricecreate");
 
 
-        int idInt=0;
-        int idCreateInt=0;
-        double priceCreateDouble=0;
+        int idInt = 0;
+        int idCreateInt = 0;
+        double priceCreateDouble = 0;
         String pizzaString = "hallo";
         String createPizzaString = "Hallo";
-        String nameCreateString="";
+        String nameCreateString = "";
 
         if (id != null) {
             try {
@@ -48,8 +99,8 @@ public class PizzaServlet extends HttpServlet {
         if (idInt >= 1) {
             pizzaString = pizzaService.getPizzaByID(idInt);
 
-        }else {
-            pizzaString="Keine Negativen IDs.";
+        } else {
+            pizzaString = "Keine Negativen IDs.";
         }
 
 
@@ -62,7 +113,7 @@ public class PizzaServlet extends HttpServlet {
         }
 
 
-        if(namecreate!=null){
+        if (namecreate != null) {
             try {
                 nameCreateString = namecreate;
             } catch (NumberFormatException e) {
@@ -71,8 +122,7 @@ public class PizzaServlet extends HttpServlet {
         }
 
 
-
-        if(pricecreate != null) {
+        if (pricecreate != null) {
             try {
                 priceCreateDouble = pizzaService.priceToDouble(pricecreate);
             } catch (NumberFormatException e) {
@@ -81,14 +131,13 @@ public class PizzaServlet extends HttpServlet {
         }
 
 
-        if(idCreateInt>0 && nameCreateString!=null && priceCreateDouble>0){
-            Pizza p=pizzaService.crreatePizza(idCreateInt, nameCreateString, priceCreateDouble);
-            createPizzaString=p.toString();
+        if (idCreateInt > 0 && nameCreateString != null && priceCreateDouble > 0) {
+            Pizza p = pizzaService.crreatePizza(idCreateInt, nameCreateString, priceCreateDouble);
+            createPizzaString = p.toString();
             pizzaService.makePizza(p);
-        }else{
-            createPizzaString= "Fehler beim erstellen der neuen Pizza.";
+        } else {
+            createPizzaString = "Fehler beim erstellen der neuen Pizza.";
         }
-
 
 
         writer.write("<!DOCTYPE html>\n" +
@@ -130,7 +179,7 @@ public class PizzaServlet extends HttpServlet {
                 "creat <label for=\"pricecreate\">Price: <input id=\"pricecreate\" name=\"pricecreate\"></label></form>" +
                 "<br>\n" +
                 "<br>\n" +
-                createPizzaString+
+                createPizzaString +
                 "<br>\n" +
                 "<br>\n" +
                 "<table>\n" +

@@ -18,8 +18,8 @@ apply plugin: 'java'
 
 defaultTasks 'clean', 'build'
 
-description = 'Example Webapp Project'
-group = 'org.test'
+description = 'pizzashop'
+group = 'ch.ti8m.azubi.lod'
 version = '1.0.0-SNAPSHOT'
 
 sourceCompatibility = 1.8

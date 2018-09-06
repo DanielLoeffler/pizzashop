@@ -9,8 +9,7 @@ public class PizzaServiceImpl {
 
 
     private PizzaDAO pizzaDAO;
-    Pizza pizza =new Pizza();
-    private double price;
+
 
     public PizzaServiceImpl() {
         this.pizzaDAO = new PizzaDAOJdbc();
@@ -19,39 +18,22 @@ public class PizzaServiceImpl {
     public int idToInt(String x) {
         int id = Integer.parseInt(x);
         return id;
-
-
     }
 
-    public String getPizzaByID(int x) {
-        Pizza pizza = pizzaDAO.getPizzaByID(x);
-        if (pizza == null) {
-            return "Pizza ist nicht vorhanden.";
-        }
-        return pizza.toString();
-    }
-
-
-    public Pizza getPizza() {
-        return pizza;
+    public Pizza getPizzaByID(int x) {
+       return pizzaDAO.getPizzaByID(x);
     }
 
 
     public double priceToDouble(String x){
-        price= Double.parseDouble(x);
-        pizza.setPrice(price);
-        return price;
-    }
-
-    public double getPrice(){
-        return price;
+        return Double.parseDouble(x);
     }
 
 
     public Pizza crreatePizza(int id, String name, Double price){
-        pizza = new Pizza(id, name, price);
-        return pizza;
+        return new Pizza(id, name, price);
     }
+
 
     public void makePizza(Pizza pizza) {
         pizzaDAO.create(pizza);

@@ -1,6 +1,8 @@
 Pizzashop - ${pizzaString}
 Pizzashop - ${createPizzaString}
 
+
+#${pizza.id} <b>${pizza.name}</b> ${pizza.price}
 ============================
 
 

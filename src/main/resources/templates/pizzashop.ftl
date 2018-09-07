@@ -1,10 +1,8 @@
 Pizzashop - ${pizzaString}
+#${pizzaString?.id} <b>${pizzaString?.name}</b> ${pizzaString?.price}
 
 
-
-#${pizzaString.id} <b>${pizzaString.name}</b> ${pizzaString.price}
 ============================
-
 
 
     <!DOCTYPE html>
@@ -16,7 +14,7 @@ Pizzashop - ${pizzaString}
         </head>
         <body background=http://cdn4.micasa.ch/medias/sys_master/zoom/1/c/5/6/id_10295631904798_zoom.jpg><b>
             <a href=Pizza Restaurant.html>
-            <h1>Pizzeria HTML</h1>
+                <h1>Pizzeria HTML</h1>
             </a><br>
             <br>
             Pizza lieferung:
@@ -30,19 +28,19 @@ Pizzashop - ${pizzaString}
             show Pizza <form action="PizzaServlet" method="post"><label for=idzahl>Nummer: <input id=idzahl name=idzahl></label><br><input type="submit" value="SubmitPizzaByID"></form>
             <br>
             <br>
-    !       ${pizzaString}
+            ${pizzaString}
             <br>
             <br>
             <form action="PizzaServlet" method="post"> creat<label for=idcreate>Id: <input id=idcreate name=idcreate></label>
+                <br>
+                <br>
+                creat <label for=namecreate>Name: <input id=namecreate name=namecreate></label>
+                <br>
+                <br>
+                creat <label for=pricecreate>Price: <input id=pricecreate name=pricecreate></label><br><input type="submit" value="SubmitCreatePizza"></form>
             <br>
             <br>
-            creat <label for=namecreate>Name: <input id=namecreate name=namecreate></label>
-            <br>
-            <br>
-            creat <label for=pricecreate>Price: <input id=pricecreate name=pricecreate></label><br><input type="submit" value="SubmitCreatePizza"></form>
-            <br>
-            <br>
-    !       ${pizzaString}
+            ${pizzaString}
             <br>
             <br>
             <table>
@@ -76,8 +74,8 @@ Pizzashop - ${pizzaString}
                     <td>8.-</td>
                     <td><img src=http://blog.prospective.ch/wp-content/uploads/2012/08/qr-code.pngwidth=200></td>
                 </tr>
-            </table><br>
+            </table>
             <br>
-            </b>
+            <br>
         </body>
     </html>

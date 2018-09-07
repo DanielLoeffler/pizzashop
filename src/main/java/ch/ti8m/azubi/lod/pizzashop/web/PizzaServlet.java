@@ -2,6 +2,7 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
 import freemarker.template.*;
 
 import javax.servlet.ServletException;
@@ -10,14 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 @WebServlet("/pizzashop")
 public class PizzaServlet extends HttpServlet {
+
+
+    private Template template;
+
+    public void init() throws ServletException {
+        template = new FreemarkerConfig().loadTemplate("pizzashop.ftl");
+    }
 
 
     private Configuration configuration() {
@@ -36,39 +42,30 @@ public class PizzaServlet extends HttpServlet {
 
         resp.setContentType("text/html");
 
-
-        PrintWriter writer = new PrintWriter(resp.getWriter());
-        StringWriter writerer = new StringWriter();
-
+        //PrintWriter writer = new PrintWriter(resp.getWriter());
 
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
-
         String id = req.getParameter("idzahl");
+
 
         int idInt;
 
-        if(id!=null){
+        if (id != null) {
             idInt = pizzaService.idToInt(id);
-        }else{
-            idInt=0;
+        } else {
+            idInt = 0;
         }
 
 
         Pizza pizza = pizzaService.getPizzaByID(idInt);
-
-
-
-
-        Template template = configuration().getTemplate("pizzashop.ftl");
-
 
         Map<String, Object> model = new HashMap<>();
         model.put("pizzaString", pizza);
 
 
         try {
-            template.process(model, writerer);
+            template.process(model, resp.getWriter());
         } catch (TemplateException e) {
             e.printStackTrace();
         }
@@ -223,11 +220,11 @@ public class PizzaServlet extends HttpServlet {
         int idCreateInt = pizzaService.idToInt(idcreate);
         double priceCreateDouble = pizzaService.priceToDouble(pricecreate);
         String nameCreateString = namecreate;
-        Pizza createPizza = pizzaService.createPizza(idCreateInt,nameCreateString,priceCreateDouble);
+        Pizza createPizza = pizzaService.createPizza(idCreateInt, nameCreateString, priceCreateDouble);
         if (idCreateInt > 0 && nameCreateString != null && priceCreateDouble > 0) {
             try {
                 pizzaService.makePizza(createPizza);
-            }catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
         }

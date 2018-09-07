@@ -3,8 +3,8 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
 import freemarker.template.*;
-import org.testng.Assert;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,29 +45,26 @@ public class PizzaServlet extends HttpServlet {
 
 
         String id = req.getParameter("idzahl");
-        String idcreate = req.getParameter("idcreate");
-        String namecreate = req.getParameter("namecreate");
-        String pricecreate = req.getParameter("pricecreate");
+
+        int idInt;
+
+        if(id!=null){
+            idInt = pizzaService.idToInt(id);
+        }else{
+            idInt=0;
+        }
 
 
-        int idInt = pizzaService.idToInt(id);
-        int idCreateInt = pizzaService.idToInt(idcreate);
-        double priceCreateDouble = pizzaService.priceToDouble(pricecreate);
-        Pizza pizzaString = pizzaService.getPizzaByID(idInt);
-        String nameCreateString = namecreate;
-        Pizza createPizza = pizzaService.crreatePizza(idCreateInt, nameCreateString, priceCreateDouble);
+        Pizza pizza = pizzaService.getPizzaByID(idInt);
+
+
 
 
         Template template = configuration().getTemplate("pizzashop.ftl");
 
 
         Map<String, Object> model = new HashMap<>();
-        model.put("pizzaString", pizzaString);
-        model.put("createPizzaString", createPizza);
-
-        model.put("pizza.id", idcreate);
-        model.put("pizza.name", namecreate);
-        model.put("pizza.price", pricecreate);
+        model.put("pizzaString", pizza);
 
 
         try {
@@ -76,7 +73,9 @@ public class PizzaServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        Assert.assertEquals(pizzaString, writerer.toString());
+
+
+
 
 /*
         if (id != null) {
@@ -89,10 +88,10 @@ public class PizzaServlet extends HttpServlet {
 
 
         if (idInt >= 1) {
-            pizzaString = pizzaService.getPizzaByID(idInt);
+            pizza = pizzaService.getPizzaByID(idInt);
 
         } else {
-            pizzaString = "Keine Negativen IDs.";
+            pizza = "Keine Negativen IDs.";
         }
 
 
@@ -122,16 +121,10 @@ public class PizzaServlet extends HttpServlet {
             }
         }
 
-
-        if (idCreateInt > 0 && nameCreateString != null && priceCreateDouble > 0) {
-            Pizza p = pizzaService.crreatePizza(idCreateInt, nameCreateString, priceCreateDouble);
-            createPizzaString = p.toString();
-            pizzaService.makePizza(p);
-        } else {
-            createPizzaString = "Fehler beim erstellen der neuen Pizza.";
-        }
+*/
 
 
+/*
         writer.write("<!DOCTYPE html>\n" +
                 "<html>\n" +
                 "<head>\n" +
@@ -159,7 +152,7 @@ public class PizzaServlet extends HttpServlet {
                 "show Pizza <form><label for=\"idzahl\">Nummer: <input id=\"idzahl\" name=\"idzahl\"></label></form>" +
                 "<br>\n" +
                 "<br>\n" +
-                pizzaString +
+                pizza +
                 "<br>\n" +
                 "<br>\n" +
                 "<form> creat<label for=\"idcreate\">Id: <input id=\"idcreate\" name=\"idcreate\"></label>" +
@@ -216,5 +209,29 @@ public class PizzaServlet extends HttpServlet {
 */
 
 
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        PizzaServiceImpl pizzaService = new PizzaServiceImpl();
+
+        String idcreate = req.getParameter("idcreate");
+        String namecreate = req.getParameter("namecreate");
+        String pricecreate = req.getParameter("pricecreate");
+
+        int idCreateInt = pizzaService.idToInt(idcreate);
+        double priceCreateDouble = pizzaService.priceToDouble(pricecreate);
+        String nameCreateString = namecreate;
+        Pizza createPizza = pizzaService.createPizza(idCreateInt,nameCreateString,priceCreateDouble);
+        if (idCreateInt > 0 && nameCreateString != null && priceCreateDouble > 0) {
+            try {
+                pizzaService.makePizza(createPizza);
+            }catch (NumberFormatException e){
+                e.printStackTrace();
+            }
+        }
+
+        super.doPost(req, resp);
     }
 }

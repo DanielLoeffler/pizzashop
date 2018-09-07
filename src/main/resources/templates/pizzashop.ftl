@@ -1,8 +1,8 @@
 Pizzashop - ${pizzaString}
-Pizzashop - ${createPizzaString}
 
 
-#${pizza.id} <b>${pizza.name}</b> ${pizza.price}
+
+#${pizzaString.id} <b>${pizzaString.name}</b> ${pizzaString.price}
 ============================
 
 
@@ -27,13 +27,13 @@ Pizzashop - ${createPizzaString}
             <button type=button>show all</button>
             <br>
             <br>
-            show Pizza <form action="PizzaServlet" method="GET"><label for=idzahl>Nummer: <input id=idzahl name=idzahl></label><br><input type="submit" value="SubmitPizzaByID"></form>
+            show Pizza <form action="PizzaServlet" method="post"><label for=idzahl>Nummer: <input id=idzahl name=idzahl></label><br><input type="submit" value="SubmitPizzaByID"></form>
             <br>
             <br>
     !       ${pizzaString}
             <br>
             <br>
-            <form action="PizzaServlet" method="GET"> creat<label for=idcreate>Id: <input id=idcreate name=idcreate></label>
+            <form action="PizzaServlet" method="post"> creat<label for=idcreate>Id: <input id=idcreate name=idcreate></label>
             <br>
             <br>
             creat <label for=namecreate>Name: <input id=namecreate name=namecreate></label>
@@ -42,7 +42,7 @@ Pizzashop - ${createPizzaString}
             creat <label for=pricecreate>Price: <input id=pricecreate name=pricecreate></label><br><input type="submit" value="SubmitCreatePizza"></form>
             <br>
             <br>
-    !       ${createPizzaString}
+    !       ${pizzaString}
             <br>
             <br>
             <table>

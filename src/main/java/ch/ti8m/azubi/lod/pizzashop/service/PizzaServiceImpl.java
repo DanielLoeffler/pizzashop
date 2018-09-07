@@ -22,16 +22,16 @@ public class PizzaServiceImpl {
     }
 
     public Pizza getPizzaByID(int x) {
-       return pizzaDAO.getPizzaByID(x);
+        return pizzaDAO.getPizzaByID(x);
     }
 
 
-    public double priceToDouble(String x){
+    public double priceToDouble(String x) {
         return Double.parseDouble(x);
     }
 
 
-    public Pizza crreatePizza(int id, String name, Double price){
+    public Pizza createPizza(int id, String name, Double price) {
         return new Pizza(id, name, price);
     }
 

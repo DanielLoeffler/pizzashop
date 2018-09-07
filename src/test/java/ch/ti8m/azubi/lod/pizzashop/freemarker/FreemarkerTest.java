@@ -8,8 +8,6 @@ import freemarker.template.TemplateExceptionHandler;
 import freemarker.template.Version;
 import org.junit.Assert;
 import org.junit.Test;
-import ch.ti8m.azubi.lod.pizzashop.freemarker.data.Ingredient;
-import ch.ti8m.azubi.lod.pizzashop.freemarker.data.Recipe;
 
 import java.io.StringWriter;
 import java.util.HashMap;

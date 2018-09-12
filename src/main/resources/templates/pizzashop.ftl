@@ -1,5 +1,3 @@
-Pizzashop - ${pizzaString}
-#${pizzaString?.id} <b>${pizzaString?.name}</b> ${pizzaString?.price}
 
 
 ============================
@@ -37,7 +35,8 @@ Pizzashop - ${pizzaString}
                 creat <label for=namecreate>Name: <input id=namecreate name=namecreate></label>
                 <br>
                 <br>
-                creat <label for=pricecreate>Price: <input id=pricecreate name=pricecreate></label><br><input type="submit" value="SubmitCreatePizza"></form>
+                creat <label for=pricecreate>Price: <input id=pricecreate name=pricecreate></label><br><input type="submit" value="SubmitCreatePizza">
+            </form>
             <br>
             <br>
             ${pizzaString}
@@ -79,3 +78,8 @@ Pizzashop - ${pizzaString}
             <br>
         </body>
     </html>
+
+    Pizzashop - ${pizzaString}
+    <#if pizzaString>
+    #${pizzaString.id} <b>${pizzaString.name}</b> ${pizzaString.price}
+    </#if>

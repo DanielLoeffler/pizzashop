@@ -1,14 +1,10 @@
 
-
-============================
-
-
     <!DOCTYPE html>
     <html>
         <head>
             <meta charset=utf-8>
             <title>Pizzashop HTML</title>
-            <link rel=stylesheet type=text/css href=Pizza.css>
+
         </head>
         <body background=http://cdn4.micasa.ch/medias/sys_master/zoom/1/c/5/6/id_10295631904798_zoom.jpg><b>
             <a href=Pizza Restaurant.html>
@@ -23,10 +19,17 @@
             <button type=button>show all</button>
             <br>
             <br>
+
+            <#if pizzas??>
+                ${pizzas}
+            </#if>
+
+            <!--
             show Pizza <form action="PizzaServlet" method="post"><label for=idzahl>Nummer: <input id=idzahl name=idzahl></label><br><input type="submit" value="SubmitPizzaByID"></form>
             <br>
             <br>
-            ${pizzaString}
+            -->
+
             <br>
             <br>
             <form action="PizzaServlet" method="post"> creat<label for=idcreate>Id: <input id=idcreate name=idcreate></label>
@@ -39,7 +42,7 @@
             </form>
             <br>
             <br>
-            ${pizzaString}
+
             <br>
             <br>
             <table>
@@ -79,7 +82,3 @@
         </body>
     </html>
 
-    Pizzashop - ${pizzaString}
-    <#if pizzaString>
-    #${pizzaString.id} <b>${pizzaString.name}</b> ${pizzaString.price}
-    </#if>

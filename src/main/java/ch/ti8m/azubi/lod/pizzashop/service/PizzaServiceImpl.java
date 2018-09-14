@@ -5,6 +5,8 @@ import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
 import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaDAO;
 import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaDAOJdbc;
 
+import java.util.List;
+
 
 public class PizzaServiceImpl {
 
@@ -40,5 +42,13 @@ public class PizzaServiceImpl {
         pizzaDAO.create(pizza);
     }
 
+    public List<Pizza> list() throws Exception {
+        return pizzaDAO.getPizzas();
+
+    }
+
 
 }
+
+
+

@@ -18,7 +18,7 @@ public class ConnectionFactory {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException("MySQL JDBC Driver not found");
         }
-        String connectionURL = String.format("jdbc:mysql://%s:%d/%s", host, port, dbName);
+        String connectionURL = String.format("jdbc:mysql://%s:%d/%s?autoReconnect=true&useSSL=false", host, port, dbName);
         return DriverManager.getConnection(connectionURL, user, password);
     }
 

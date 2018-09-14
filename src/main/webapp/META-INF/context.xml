@@ -1,12 +1,12 @@
 <Context>
 
-
-<Resource name="jdbc/pizzashop" auth="Container" type="javax.sql.DataSource"
-          maxActive="50" maxIdle="30" maxWait="10000"
-          username="root" password="Danloe12"
-          driverClassName="com.mysql.jdbc.Driver"
-          url="jdbc:mysql://localhost:3306/jbdctest?useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true"
-          factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"/>
-
+    <!--
+    <Resource name="jdbc/pizzashop" auth="Container" type="javax.sql.DataSource"
+              maxActive="50" maxIdle="30" maxWait="10000"
+              username="root" password="Danloe12"
+              driverClassName="com.mysql.jdbc.Driver"
+              url="jdbc:mysql://localhost:3306/jbdctest?useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;autoReconnect=true"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"/>
+    -->
 
 </Context>

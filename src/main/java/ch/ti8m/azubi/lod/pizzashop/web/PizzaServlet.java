@@ -3,7 +3,7 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
-import freemarker.template.*;
+import freemarker.template.Template;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Locale;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/pizzashop")
@@ -25,7 +25,7 @@ public class PizzaServlet extends HttpServlet {
         template = new FreemarkerConfig().loadTemplate("pizzashop.ftl");
     }
 
-
+/*
     private Configuration configuration() {
         Configuration config = new Configuration();
         config.setDefaultEncoding("UTF-8");
@@ -37,6 +37,15 @@ public class PizzaServlet extends HttpServlet {
     }
 
 
+    public Template loadTemplate(String resourcePath) throws ServletException {
+        try {
+            return configuration().getTemplate(resourcePath);
+        } catch (IOException e) {
+            throw new ServletException("Failed to load Template" + e.getMessage());
+        }
+    }
+*/
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
@@ -46,7 +55,7 @@ public class PizzaServlet extends HttpServlet {
 
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
-        String id = req.getParameter("idzahl");
+        /*String id = req.getParameter("idzahl");
 
 
         int idInt;
@@ -59,18 +68,20 @@ public class PizzaServlet extends HttpServlet {
 
 
         Pizza pizza = pizzaService.getPizzaByID(idInt);
-
         Map<String, Object> model = new HashMap<>();
         model.put("pizzaString", pizza);
-
+        */
 
         try {
-            template.process(model, resp.getWriter());
-        } catch (TemplateException e) {
+            List<Pizza> pizzas = pizzaService.list();
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("pizzas", pizzas);
+
+        } catch (Exception e) {
             e.printStackTrace();
+            throw new IOException(e);
         }
-
-
 
 
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,11 +52,14 @@ public class PizzaServlet extends HttpServlet {
 
         resp.setContentType("text/html");
 
+
         //PrintWriter writer = new PrintWriter(resp.getWriter());
 
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
-        /*String id = req.getParameter("idzahl");
+
+        /*
+        String id = req.getParameter("idzahl");
 
 
         int idInt;
@@ -72,16 +76,19 @@ public class PizzaServlet extends HttpServlet {
         model.put("pizzaString", pizza);
         */
 
+
         try {
             List<Pizza> pizzas = pizzaService.list();
-
+            PrintWriter writer = resp.getWriter();
             Map<String, Object> model = new HashMap<>();
             model.put("pizzas", pizzas);
-
+            template.process(model, writer);
         } catch (Exception e) {
             e.printStackTrace();
             throw new IOException(e);
         }
+
+
 
 
 

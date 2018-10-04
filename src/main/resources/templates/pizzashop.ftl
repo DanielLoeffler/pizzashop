@@ -16,7 +16,14 @@
             Zur auswahl stehen folgende Sorten mit dem Preis f&uumlr die Kleine Pizza
             <br>
             <br>
-            <button type=button>show all</button>
+
+            <form action="PizzaServler" method="post">
+
+            <!--<input type="text" name="text" placeholder="New note">-->
+
+                <input type="submit" value="button">
+            </form>
+
             <br>
             <br>
 

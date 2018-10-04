@@ -44,10 +44,8 @@ public class PizzaServiceImpl {
 
     public List<Pizza> list() throws Exception {
         return pizzaDAO.getPizzas();
-
-
     }
-
+    
 
 }
 

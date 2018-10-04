@@ -235,6 +235,14 @@ public class PizzaServlet extends HttpServlet {
         String namecreate = req.getParameter("namecreate");
         String pricecreate = req.getParameter("pricecreate");
 
+        /*
+        String button = req.getParameter("button");
+
+        if ("button".equals(button)) {
+            pizzaService.list();
+        }
+        */
+
         int idCreateInt = pizzaService.idToInt(idcreate);
         double priceCreateDouble = pizzaService.priceToDouble(pricecreate);
         String nameCreateString = namecreate;

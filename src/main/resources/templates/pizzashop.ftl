@@ -13,7 +13,7 @@
 
         </head>
         <body background=http://cdn4.micasa.ch/medias/sys_master/zoom/1/c/5/6/id_10295631904798_zoom.jpg><b>
-            <a href=Pizza Restaurant.html>
+            <a href=http://localhost:8080/test/pizzashop>
                 <h1>Pizzeria HTML</h1>
             </a><br>
             <br>
@@ -37,17 +37,26 @@
             <#else>
                 Es sind keine Pizzas gespeichert
             </#if>
-
-
             <br>
             <br>
-            <form action="PizzaServlet" method="post"> creat<label for=idcreate>Id: <input id=idcreate name=idcreate></label>
-                <br>
-                <br>
-                creat <label for=namecreate>Name: <input id=namecreate name=namecreate></label>
-                <br>
-                <br>
-                creat <label for=pricecreate>Price: <input id=pricecreate name=pricecreate></label><br><input type="submit" value="SubmitCreatePizza">
+
+            Eien neue Pizza erstellen
+            <form action="PizzaServlet" method="post">
+                <table>
+                    <tr>
+                        <td><label for=idcreate>create Id:</td>
+                        <td><input id=idcreate name=idcreate></label></td>
+                    </tr>
+                    <tr>
+                        <td><label for=namecreate>create Name: </td>
+                        <td><input id=idcreate name=idcreate></label></td>
+                    </tr>
+                    <tr>
+                        <td><label for=pricecreate>create Price: </td>
+                        <td><input id=pricecreate name=pricecreate></label></td>
+                    </tr>
+                </table>
+                <input type="submit" value="SubmitCreatePizza">
             </form>
             <br>
         </body>

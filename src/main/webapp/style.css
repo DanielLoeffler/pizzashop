@@ -1,57 +1,72 @@
+/*
+
 @import url('https://fonts.googleapis.com/css?family=Lato:300,400,700,900');
-
-* {
-    font-family: Lato, Calibri, sans-serif;
-    color: #444455;
-}
-
-body {
-    padding: 20px;
-}
-
-h1, h2, h3, h4 {
-    font-weight: 900;
-}
-
-h1 {
-    margin-top: 0;
-}
-
-h4 {
-    margin-bottom: 0;
-}
-
-b {
-    font-weight: 900;
-}
 
 table {
     border-collapse: collapse;
-    width: 75%;
+    width: 300px;
+}
+* {
+    box-sizing: border-box;
 }
 
-th, td {
-    text-align: left;
-    padding: 5px 10px;
+body {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-th {
-    font-weight: bold;
-    border-bottom: 1px solid #999999;
+// Style the header //
+header {
+    background-color: #666;
+    padding: 30px;
+    text-align: center;
+    font-size: 35px;
+    color: white;
 }
 
-div.note {
-    background: #FBE96C;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
-    padding: 15px;
-    margin: 10px;
+// Create two columns/boxes that floats next to each other //
+nav {
     float: left;
-    width: 200px;
-    min-height: 200px;
+    width: 30%;
+    height: 300px; // only for demonstration, should be removed //
+    background: #ccc;
+    padding: 20px;
 }
 
-div.container:after {
-    content: '';
-    display: block;
+// Style the list inside the menu //
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+article {
+    float: left;
+    padding: 20px;
+    width: 70%;
+    background-color: #f1f1f1;
+    height: 300px; // only for demonstration, should be removed //
+}
+
+// Clear floats after the columns //
+section:after {
+    content: "";
+    display: table;
     clear: both;
 }
+
+// Style the footer //
+footer {
+    background-color: #777;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+// Responsive layout - makes the two columns/boxes stack on top of each other instead of next to each other, on small screens //
+@media (max-width: 600px) {
+    nav, article {
+        width: 100%;
+        height: auto;
+    }
+}
+
+*/

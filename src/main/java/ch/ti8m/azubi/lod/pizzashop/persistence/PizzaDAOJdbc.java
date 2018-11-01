@@ -63,7 +63,7 @@ public class PizzaDAOJdbc implements PizzaDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.out.println("Pizza wurde nicht gefunden: " + e.getMessage());
+            throw new RuntimeException("Pizza wurde nicht gefunden: " + e.getMessage());
         }
 
         return pizza;
@@ -95,7 +95,7 @@ public class PizzaDAOJdbc implements PizzaDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
+            throw new RuntimeException("Fehlre beim Erstellen der Pizza: " + e.getMessage());
         }
     }
 
@@ -127,7 +127,7 @@ public class PizzaDAOJdbc implements PizzaDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Fehler beim Update der Pizza: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Update der Pizza: " + e.getMessage());
         }
 
     }
@@ -156,7 +156,7 @@ public class PizzaDAOJdbc implements PizzaDAO {
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der Pizza: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Löschen der Pizza: " + e.getMessage());
         }
     }
 

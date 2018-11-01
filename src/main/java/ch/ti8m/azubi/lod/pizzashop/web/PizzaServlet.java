@@ -37,25 +37,6 @@ public class PizzaServlet extends HttpServlet {
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
 
-        /*
-        String id = req.getParameter("idzahl");
-
-
-        int idInt;
-
-        if (id != null) {
-            idInt = pizzaService.idToInt(id);
-        } else {
-            idInt = 0;
-        }
-
-
-        Pizza pizza = pizzaService.getPizzaByID(idInt);
-        Map<String, Object> model = new HashMap<>();
-        model.put("pizzaString", pizza);
-        */
-
-
         try {
             List<Pizza> pizzas = pizzaService.list();
             PrintWriter writer = resp.getWriter();
@@ -124,6 +105,9 @@ public class PizzaServlet extends HttpServlet {
 
         PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("UTF-8");
+
         String idcreate = req.getParameter("idcreate");
         String namecreate = req.getParameter("namecreate");
         String pricecreate = req.getParameter("pricecreate");
@@ -139,8 +123,9 @@ public class PizzaServlet extends HttpServlet {
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }
+
         }
 
-        super.doPost(req, resp);
+        resp.sendRedirect(req.getRequestURI());
     }
 }

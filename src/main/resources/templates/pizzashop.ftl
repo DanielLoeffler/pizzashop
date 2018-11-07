@@ -139,14 +139,10 @@
                 <p>
                     <form action="pizzashop" method="post">
                         <table class="center">
-                            <tr>
-                                <td><label for=idcreate>create Id:</td>
-                                <td><input id=idcreate name=idcreate></label></td>
-                            </tr>
 
                             <tr>
                                 <td><label for=namecreate>create Name: </td>
-                                <td><input id=idcreate name=idcreate></label></td>
+                                <td><input id=namecreate name=namecreate></label></td>
                             </tr>
 
                             <tr>

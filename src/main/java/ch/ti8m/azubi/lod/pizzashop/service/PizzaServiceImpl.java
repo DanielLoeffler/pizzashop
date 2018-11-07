@@ -33,8 +33,8 @@ public class PizzaServiceImpl {
     }
 
 
-    public Pizza createPizza(int id, String name, Double price) {
-        return new Pizza(id, name, price);
+    public Pizza createPizza(String name, Double price) {
+        return new Pizza(name, price);
     }
 
 
@@ -45,7 +45,7 @@ public class PizzaServiceImpl {
     public List<Pizza> list() throws Exception {
         return pizzaDAO.getPizzas();
     }
-    
+
 
 }
 

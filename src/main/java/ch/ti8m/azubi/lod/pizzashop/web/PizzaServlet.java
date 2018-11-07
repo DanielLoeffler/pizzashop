@@ -108,23 +108,22 @@ public class PizzaServlet extends HttpServlet {
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
 
-        String idcreate = req.getParameter("idcreate");
         String namecreate = req.getParameter("namecreate");
         String pricecreate = req.getParameter("pricecreate");
 
-
-        int idCreateInt = pizzaService.idToInt(idcreate);
-        double priceCreateDouble = pizzaService.priceToDouble(pricecreate);
-        String nameCreateString = namecreate;
-        Pizza createPizza = pizzaService.createPizza(idCreateInt, nameCreateString, priceCreateDouble);
-        if (idCreateInt > 0 && nameCreateString != null && priceCreateDouble > 0) {
-            try {
-                pizzaService.makePizza(createPizza);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-
+        if (namecreate == null || namecreate.trim().length() == 0) {
+            throw new ServletException("pizza name is required");
         }
+
+        double priceCreateDouble;
+        try {
+            priceCreateDouble = pizzaService.priceToDouble(pricecreate);
+        } catch (NumberFormatException ex) {
+            throw new ServletException("pizza price is required and must be a number");
+        }
+
+        Pizza createPizza = pizzaService.createPizza(namecreate, priceCreateDouble);
+        pizzaService.makePizza(createPizza);
 
         resp.sendRedirect(req.getRequestURI());
     }

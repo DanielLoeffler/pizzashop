@@ -15,6 +15,12 @@ public class Pizza {
         this.price = price;
     }
 
+    public Pizza(String name, Double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+
     public Integer getId() {
         return id;
     }

@@ -86,12 +86,12 @@ public class PizzaDAOJdbc implements PizzaDAO {
     @Override
     public void create(Pizza pizza) {
 
-        String query = "insert into pizza (id, name, price) values( ? , ? , ? );";
+        String query = "insert into pizza (name, price) values( ? , ? );";
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
-            preparedStatement.setInt(1, pizza.getId());
-            preparedStatement.setString(2, pizza.getName());
-            preparedStatement.setDouble(3, pizza.getPrice());
+            // preparedStatement.setInt(1, pizza.getId());
+            preparedStatement.setString(1, pizza.getName());
+            preparedStatement.setDouble(2, pizza.getPrice());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {

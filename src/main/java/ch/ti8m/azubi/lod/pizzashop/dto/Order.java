@@ -1,39 +1,25 @@
 package ch.ti8m.azubi.lod.pizzashop.dto;
 
-import java.util.Date;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Order {
 
-    private Integer id;
-    private Date date;
+
     private String phone;
     private String address;
 
-    public Order() {
-    }
+    private List<PizzaBestellung> bestellungen = new LinkedList<>();
 
-    public Order(Integer id, Date date, String phone, String address) {
-        this.id = id;
-        this.date = date;
+
+    public Order(String phone, String address) {
+
+
         this.phone = phone;
         this.address = address;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
     public String getPhone() {
         return phone;
@@ -51,8 +37,19 @@ public class Order {
         this.address = address;
     }
 
+    public List<PizzaBestellung> getBestellungen() {
+        return bestellungen;
+    }
+
+    public void setBestellungen(List<PizzaBestellung> bestellungen) {
+        this.bestellungen = bestellungen;
+    }
+
+
+    /*
     @Override
     public String toString() {
-        return "#" + id + ": " + date + ", "+phone+", "+address;
+        return phone + ", " + address;
     }
+    */
 }

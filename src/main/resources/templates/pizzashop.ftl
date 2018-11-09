@@ -32,7 +32,7 @@
                 nav {
                     float: left;
                     width: 30%;
-                    height: 300px; /* only for demonstration, should be removed */
+                    /*height: 300px;  only for demonstration, should be removed */
                     background: rgba(149, 165, 166, 0.8);
                     padding: 20px;
                 }
@@ -48,7 +48,7 @@
                     padding: 20px;
                     width: 70%;
                     background-color: rgba(248, 249, 249, 0.8);
-                    height: 300px; /* only for demonstration, should be removed */
+                    /*height: 300px;  only for demonstration, should be removed */
                 }
 
 
@@ -97,21 +97,37 @@
 
                     <form action="pizzashop" method="post">
                         <#if pizzas??>
-                            <select>
+                            <select name="pizza">
                                 <#list pizzas as pizza>
-                                    <option value="pizza">${pizza.name}</option>
+                                    <option value="${pizza.id}">${pizza.name}</option>
                                 </#list>
                             </select>
+
+                            <br>
+                            anzahl:
+                            <br>
+                            <table>
+                                <tr>
+                                    <label for=anzahl><input id=anzahl name=anzahl></label>
+                                </tr>
+                                <tr>
+                                    <<label for=tel><input id=tel name=tel></label>
+                                </tr>
+                                <tr>
+                                    <<label for=address><input id=address name=address></label>
+                                </tr>
+                            </table>
+                            <input type="submit" value="SubmitOrderPizza">
+                            <br>
+                            <br>
+                            Sie haben volgende Pizza bestelt:
+                            <br>
+                            <#list pizzas as pizza>
+                                ${pizza.name}
+                            </#list>
                         </#if>
-                        <br>
-                        anzahl:
-                        <br>
-                        <table>
-                            <tr>
-                                <label for=anzahl><input id=anzahl name=anzahl></label>
-                            </tr>
-                        </table>
-                        <input type="submit" value="SubmitOrderPizza">
+
+
                     </form>
                 </nav>
 

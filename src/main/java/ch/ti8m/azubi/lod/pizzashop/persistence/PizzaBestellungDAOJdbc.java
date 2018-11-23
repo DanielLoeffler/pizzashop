@@ -31,11 +31,11 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("select * from pizza_bestellung;");
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
+                //int id = resultSet.getInt("id");
                 int bestellung_id = resultSet.getInt("bestellung_id");
                 int pizza_id = resultSet.getInt("pizza_id");
                 int anzahl = resultSet.getInt("anzahl");
-                pizzaBestellungs.add(new PizzaBestellung(id, bestellung_id, pizza_id, anzahl));
+                pizzaBestellungs.add(new PizzaBestellung(bestellung_id, pizza_id, anzahl));
             }
         }
 
@@ -58,7 +58,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
             int pizza_id = resultSet.getInt("pizza_id");
             int anzahl = resultSet.getInt("anzahl");
 
-            pizzaBestellung = new PizzaBestellung(tempID, bestellung_id, pizza_id, anzahl);
+            //pizzaBestellung = new PizzaBestellung(tempID, bestellung_id, pizza_id, anzahl);
         } catch (SQLException e) {
             System.out.println("Pizza_Order wurde nicht gefunden: " + e.getMessage());
         }
@@ -73,7 +73,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
     public void create(PizzaBestellung pizzaBestellung) {
 
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("insert into pizza_bestellung (id, bestellung_id, pizza_id, anzahl) values(" + pizzaBestellung.getId() + ", " + pizzaBestellung.getBestellung_id() + ", " + pizzaBestellung.getPizza_id() + ", "+pizzaBestellung.getAnzahl()+");");
+            statement.executeUpdate("insert into pizza_bestellung (id, bestellung_id, pizza_id, anzahl) values(" + pizzaBestellung.getBestellung_id() + ", " + pizzaBestellung.getPizza_id() + ", " + pizzaBestellung.getAnzahl() + ");");
 
         } catch (SQLException e) {
             System.out.println("Fehlre beim Erstellen der PizzaOrder: " + e.getMessage());
@@ -86,10 +86,10 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
     @Override
     public void update(PizzaBestellung pizzaBestellung, int id) {
 
-        try(Statement statement=connection.createStatement()) {
-            statement.executeUpdate("update pizza_bestellung set id="+pizzaBestellung.getId()+", bestellung_id="+pizzaBestellung.getBestellung_id()+", pizza_id="+pizzaBestellung.getPizza_id()+", anzahl="+pizzaBestellung.getAnzahl()+" where id="+id+";");
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("update pizza_bestellung bestellung_id=" + pizzaBestellung.getBestellung_id() + ", pizza_id=" + pizzaBestellung.getPizza_id() + ", anzahl=" + pizzaBestellung.getAnzahl() + " where id=" + id + ";");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Update der pizza_Order: "+e.getMessage());
+            System.out.println("Fehler beim Update der pizza_Order: " + e.getMessage());
         }
 
     }
@@ -98,12 +98,12 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
      * Delete a order by id.
      */
     @Override
-    public void delete(int id)  {
+    public void delete(int id) {
 
-        try(Statement statement=connection.createStatement()) {
-            statement.executeUpdate("delete from pizza_bestellung where id="+id+";");
+        try (Statement statement = connection.createStatement()) {
+            statement.executeUpdate("delete from pizza_bestellung where id=" + id + ";");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der Pizza_Order: "+e.getMessage());
+            System.out.println("Fehler beim Löschen der Pizza_Order: " + e.getMessage());
         }
     }
 

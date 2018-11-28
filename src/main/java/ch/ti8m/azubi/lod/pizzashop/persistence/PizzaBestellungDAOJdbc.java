@@ -35,7 +35,8 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
                 int bestellung_id = resultSet.getInt("bestellung_id");
                 int pizza_id = resultSet.getInt("pizza_id");
                 int anzahl = resultSet.getInt("anzahl");
-                pizzaBestellungs.add(new PizzaBestellung(bestellung_id, pizza_id, anzahl));
+                double preis = resultSet.getDouble("preis");
+                pizzaBestellungs.add(new PizzaBestellung(bestellung_id, pizza_id, anzahl, preis));
             }
         }
 
@@ -73,7 +74,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
     public void create(PizzaBestellung pizzaBestellung) {
 
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("insert into pizza_bestellung (id, bestellung_id, pizza_id, anzahl) values(" + pizzaBestellung.getBestellung_id() + ", " + pizzaBestellung.getPizza_id() + ", " + pizzaBestellung.getAnzahl() + ");");
+            statement.executeUpdate("insert into pizza_bestellung (bestellung_id, pizza_id, anzahl, preis) values(" + pizzaBestellung.getBestellung_id() + ", " + pizzaBestellung.getPizza_id() + ", " + pizzaBestellung.getAnzahl() + pizzaBestellung.getPreis() + ");");
 
         } catch (SQLException e) {
             System.out.println("Fehlre beim Erstellen der PizzaOrder: " + e.getMessage());

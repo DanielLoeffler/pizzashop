@@ -10,7 +10,7 @@ public interface OrderDAO {
 
     Order getOrderByID(int id);
 
-    void create(Order order);
+    Order create(Order order);
 
     void update(Order order, int id);
 

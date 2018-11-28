@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Order {
 
-
+    private int id;
     private String phone;
     private String address;
 
@@ -14,12 +14,17 @@ public class Order {
 
 
     public Order(String phone, String address) {
-
-
         this.phone = phone;
         this.address = address;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getPhone() {
         return phone;

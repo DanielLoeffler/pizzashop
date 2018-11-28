@@ -81,13 +81,13 @@
             </style>
 
         </head>
-        <body background="https://previews.123rf.com/images/feverpitched/feverpitched1008/feverpitched100800015/7652506-rot-und-wei%C3%9F-kariert-picknick-decke-tischtuch-detail.jpg";>
+        <body background="https://previews.123rf.com/images/feverpitched/feverpitched1008/feverpitched100800015/7652506-rot-und-wei%C3%9F-kariert-picknick-decke-tischtuch-detail.jpg">
             <header>
-              <a href=http://localhost:8080/test/pizzashop>
+              <a href=http://localhost:8080/test/pizza>
                   <h1>Pizzeria HTML</h1>
               </a>
             </header>
-            </div>
+
             <section>
                 <nav>
                     <ul>
@@ -95,7 +95,7 @@
                         <li>Wählen sie eine Pizza aus:</li>
                     </ul>
 
-                    <form action="pizzashop" method="post">
+                    <form action="order" method="post">
                         <#if pizzas??>
                             <select name="pizza">
                                 <#list pizzas as pizza>
@@ -104,29 +104,47 @@
                             </select>
 
                             <br>
-                            anzahl:
                             <br>
                             <table>
                                 <tr>
-                                    <label for=anzahl><input id=anzahl name=anzahl></label>
+                                    <td>
+                                        anzahl:
+                                    </td>
+                                    <td>
+                                        <label for=anzahl><input id=anzahl name=anzahl></label>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <<label for=tel><input id=tel name=tel></label>
+                                    <td>
+                                        Tel:
+                                    </td>
+                                    <td>
+                                        <label for=tel><input id=tel name=tel></label>
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <<label for=address><input id=address name=address></label>
+                                    <td>
+                                        addresse:
+                                    </td>
+                                    <td>
+                                        <label for=address><input id=address name=address></label>
+                                    </td>
                                 </tr>
                             </table>
                             <input type="submit" value="SubmitOrderPizza">
                             <br>
                             <br>
-                            Sie haben volgende Pizza bestelt:
+                            Es sind folgende orders vorhanden:
                             <br>
-                            <#list pizzas as pizza>
-                                ${pizza.name}
-                            </#list>
+                            <#if orders??>
+                                <#list orders as order>
+                                    ${order.phone},
+                                    ${order.address},
+                                </#list>
+                            <#else>
+                                Es giebt keine gespeicherte Orders
+                            </#if>
                         </#if>
-
 
                     </form>
                 </nav>
@@ -153,7 +171,7 @@
             <footer>
                 <p>Eien neue Pizza erstellen</p>
                 <p>
-                    <form action="pizzashop" method="post">
+                    <form action="pizza" method="post">
                         <table class="center">
 
                             <tr>

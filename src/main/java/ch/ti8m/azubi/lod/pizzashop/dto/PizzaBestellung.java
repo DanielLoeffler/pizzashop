@@ -6,11 +6,13 @@ public class PizzaBestellung {
     private Integer bestellung_id;
     private Integer pizza_id;
     private Integer anzahl;
+    private double preis;
 
-    public PizzaBestellung(Integer bestellung_id, Integer pizza_id, Integer anzahl) {
+    public PizzaBestellung(Integer bestellung_id, Integer pizza_id, Integer anzahl, double preis) {
         this.bestellung_id = bestellung_id;
         this.pizza_id = pizza_id;
         this.anzahl = anzahl;
+        this.preis = preis;
     }
 
 
@@ -36,5 +38,13 @@ public class PizzaBestellung {
 
     public void setAnzahl(Integer anzahl) {
         this.anzahl = anzahl;
+    }
+
+    public double getPreis() {
+        return preis;
+    }
+
+    public void setPreis(double preis) {
+        this.preis = preis;
     }
 }

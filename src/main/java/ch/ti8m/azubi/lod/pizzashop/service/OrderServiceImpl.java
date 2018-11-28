@@ -2,12 +2,17 @@ package ch.ti8m.azubi.lod.pizzashop.service;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
+import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.persistence.OrderDAO;
+import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaBestellungDAO;
+
+import java.util.List;
 
 
 public class OrderServiceImpl {
 
     private OrderDAO orderDAO;
+    private PizzaBestellungDAO pizzaBestellungDAO;
 
 
     PizzaServiceImpl pizzaService = new PizzaServiceImpl();
@@ -27,8 +32,8 @@ public class OrderServiceImpl {
         return new Order(phone, address);
     }
 
-    public void makeOrder(Order order) {
-        orderDAO.create(order);
+    public Order makeOrder(Order order) {
+        return orderDAO.create(order);
     }
 
 
@@ -41,5 +46,13 @@ public class OrderServiceImpl {
 
     }
 
+    public List<Order> list() throws Exception {
+        return orderDAO.getOrders();
+    }
+
+
+    public void createpizzaBestellung(PizzaBestellung pizzaBestellung) {
+        pizzaBestellungDAO.create(pizzaBestellung);
+    }
 
 }

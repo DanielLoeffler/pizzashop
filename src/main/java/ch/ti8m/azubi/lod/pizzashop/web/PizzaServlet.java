@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet("/pizzashop")
+@WebServlet("/pizza")
 public class PizzaServlet extends HttpServlet {
 
 

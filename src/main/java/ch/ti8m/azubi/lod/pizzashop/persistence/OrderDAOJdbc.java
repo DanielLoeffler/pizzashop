@@ -74,13 +74,17 @@ public class OrderDAOJdbc implements OrderDAO {
      * Create a new order.
      */
     @Override
-    public void create(Order order) {
+    public Order create(Order order) {
 
         try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("insert into bestellung (phone, address) values(" + order.getPhone() + ", " + order.getPhone() + ");");
-
+            statement.executeUpdate("insert into bestellung (phone, address) values(" + order.getPhone() + ", " + order.getPhone() + ");", statement.RETURN_GENERATED_KEYS);
+            ResultSet generatedKeys = statement.getGeneratedKeys();
+            generatedKeys.next();
+            int id = generatedKeys.getInt(1);
+            order.setId(id);
+            return order;
         } catch (SQLException e) {
-            System.out.println("Fehlre beim Erstellen der Order: " + e.getMessage());
+            throw new RuntimeException("Fehlre beim Erstellen der Order: " + e.getMessage());
         }
     }
 

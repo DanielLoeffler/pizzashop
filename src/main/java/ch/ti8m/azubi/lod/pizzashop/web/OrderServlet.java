@@ -2,8 +2,11 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
+import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.service.OrderServiceImpl;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
+import freemarker.template.Template;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,16 +14,51 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
-@WebServlet("/pizzashop")
+@WebServlet("/order")
 public class OrderServlet extends HttpServlet {
+
+
+    private PizzaServiceImpl pizzaService = new PizzaServiceImpl();
+    private OrderServiceImpl orderService = new OrderServiceImpl();
+
+    private Template template;
+
+    public void init() throws ServletException {
+        template = new FreemarkerConfig().loadTemplate("pizzashop.ftl");
+    }
+
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+
+        resp.setContentType("text/html");
+
+
+        //PrintWriter writer = new PrintWriter(resp.getWriter());
+
+        OrderServiceImpl orderService = new OrderServiceImpl();
+
+
+        try {
+            List<Order> orders = orderService.list();
+            PrintWriter writer = resp.getWriter();
+            Map<String, Object> model = new HashMap<>();
+            model.put("orders", orders);
+            template.process(model, writer);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new IOException(e);
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-
-        PizzaServiceImpl pizzaService = new PizzaServiceImpl();
-        OrderServiceImpl orderService = new OrderServiceImpl();
 
 
         resp.setContentType("text/html");
@@ -57,11 +95,12 @@ public class OrderServlet extends HttpServlet {
         }
 
         Order creatOrder = orderService.createOrder(telString, addressString);
-        orderService.makeOrder(creatOrder);
+        creatOrder = orderService.makeOrder(creatOrder);
         double total = orderService.calculatePrice(pricedouble, anzahlInt);
+        PizzaBestellung pizzaBestellung = new PizzaBestellung(creatOrder.getId(), pizzaIDInt, anzahlInt, total);
+        orderService.createpizzaBestellung(pizzaBestellung);
 
-
-        resp.sendRedirect(req.getRequestURI());
+        resp.sendRedirect(req.getRequestURI() + "?order=" + creatOrder.getId());
     }
 
 

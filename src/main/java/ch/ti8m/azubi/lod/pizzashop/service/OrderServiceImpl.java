@@ -4,18 +4,19 @@ import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
 import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.persistence.OrderDAO;
+import ch.ti8m.azubi.lod.pizzashop.persistence.OrderDAOJdbc;
 import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaBestellungDAO;
+import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaBestellungDAOJdbc;
 
 import java.util.List;
 
 
 public class OrderServiceImpl {
 
-    private OrderDAO orderDAO;
-    private PizzaBestellungDAO pizzaBestellungDAO;
+    private OrderDAO orderDAO = new OrderDAOJdbc();
+    private PizzaBestellungDAO pizzaBestellungDAO = new PizzaBestellungDAOJdbc();
 
-
-    PizzaServiceImpl pizzaService = new PizzaServiceImpl();
+    private PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
 
     public OrderServiceImpl() {

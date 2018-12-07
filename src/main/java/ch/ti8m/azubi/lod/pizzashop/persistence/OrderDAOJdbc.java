@@ -20,7 +20,7 @@ public class OrderDAOJdbc implements OrderDAO {
         try {
             this.connection = ConnectionFactory.createDBConnection("localhost", 3306, "pizzashop", "root", "Danloe12");
         } catch (SQLException e) {
-            System.out.println("Fehler beim erstellen der DB-Connection: " + e.getMessage());
+            throw new RuntimeException("Fehler beim erstellen der DB-Connection: " + e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class OrderDAOJdbc implements OrderDAO {
 
             //order = new Order(tempID, date, phone, address);
         } catch (SQLException e) {
-            System.out.println("Order wurde nicht gefunden: " + e.getMessage());
+            throw new RuntimeException("Order wurde nicht gefunden: " + e.getMessage());
         }
 
         return order;
@@ -97,7 +97,7 @@ public class OrderDAOJdbc implements OrderDAO {
         try (Statement statement = connection.createStatement()) {
             //statement.executeUpdate("update bestellung set id="+order.getId()+", date="+order.getDate()+", phone="+order.getPhone()+", address="+order.getAddress()+" where id="+id+";");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Update der Order: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Update der Order: " + e.getMessage());
         }
 
     }
@@ -112,7 +112,7 @@ public class OrderDAOJdbc implements OrderDAO {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("delete from bestellung where id=" + id + ";");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der order: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Löschen der order: " + e.getMessage());
         }
     }
 

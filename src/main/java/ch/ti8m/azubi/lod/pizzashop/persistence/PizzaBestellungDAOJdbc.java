@@ -17,7 +17,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
         try {
             this.connection = ConnectionFactory.createDBConnection("localhost", 3306, "pizzashop", "root", "Danloe12");
         } catch (SQLException e) {
-            System.out.println("Fehler beim erstellen der DB-Connection: " + e.getMessage());
+            throw new RuntimeException("Fehler beim erstellen der DB-Connection: " + e.getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
 
             //pizzaBestellung = new PizzaBestellung(tempID, bestellung_id, pizza_id, anzahl);
         } catch (SQLException e) {
-            System.out.println("Pizza_Order wurde nicht gefunden: " + e.getMessage());
+            throw new RuntimeException("Pizza_Order wurde nicht gefunden: " + e.getMessage());
         }
 
         return pizzaBestellung;
@@ -77,7 +77,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
             statement.executeUpdate("insert into pizza_bestellung (bestellung_id, pizza_id, anzahl, preis) values(" + pizzaBestellung.getBestellung_id() + ", " + pizzaBestellung.getPizza_id() + ", " + pizzaBestellung.getAnzahl() + pizzaBestellung.getPreis() + ");");
 
         } catch (SQLException e) {
-            System.out.println("Fehlre beim Erstellen der PizzaOrder: " + e.getMessage());
+            throw new RuntimeException("Fehlre beim Erstellen der PizzaOrder: " + e.getMessage());
         }
     }
 
@@ -90,7 +90,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("update pizza_bestellung bestellung_id=" + pizzaBestellung.getBestellung_id() + ", pizza_id=" + pizzaBestellung.getPizza_id() + ", anzahl=" + pizzaBestellung.getAnzahl() + " where id=" + id + ";");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Update der pizza_Order: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Update der pizza_Order: " + e.getMessage());
         }
 
     }
@@ -104,7 +104,7 @@ public class PizzaBestellungDAOJdbc implements PizzaBestellungDAO {
         try (Statement statement = connection.createStatement()) {
             statement.executeUpdate("delete from pizza_bestellung where id=" + id + ";");
         } catch (SQLException e) {
-            System.out.println("Fehler beim Löschen der Pizza_Order: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Löschen der Pizza_Order: " + e.getMessage());
         }
     }
 

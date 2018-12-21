@@ -3,6 +3,7 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
+import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
 import ch.ti8m.azubi.lod.pizzashop.service.OrderServiceImpl;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
@@ -75,7 +76,7 @@ public class OrderServlet extends HttpServlet {
         int anzahlInt;
         int pizzaIDInt;
         double pricedouble;
-    
+
         try {
             anzahlInt = pizzaService.idToInt(anzahlString);
         } catch (NumberFormatException ex) {
@@ -99,6 +100,10 @@ public class OrderServlet extends HttpServlet {
         double total = orderService.calculatePrice(pricedouble, anzahlInt);
         PizzaBestellung pizzaBestellung = new PizzaBestellung(creatOrder.getId(), pizzaIDInt, anzahlInt, total);
         orderService.createpizzaBestellung(pizzaBestellung);
+
+
+        ObjectMapperFactory objectMapperFactory = new ObjectMapperFactory();
+        String json = objectMapperFactory.objectMapper().writeValueAsString(pizzaBestellung);
 
         resp.sendRedirect(req.getRequestURI() + "?order=" + creatOrder.getId());
     }

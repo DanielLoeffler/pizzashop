@@ -1,9 +1,14 @@
 package ch.ti8m.azubi.lod.pizzashop.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.LinkedList;
 import java.util.List;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 
     private int id;
@@ -13,11 +18,13 @@ public class Order {
     private List<PizzaBestellung> bestellungen = new LinkedList<>();
 
 
+    @JsonCreator
     public Order(String phone, String address) {
         this.phone = phone;
         this.address = address;
     }
 
+    @JsonProperty("id")
     public int getId() {
         return id;
     }
@@ -26,6 +33,7 @@ public class Order {
         this.id = id;
     }
 
+    @JsonProperty("phone")
     public String getPhone() {
         return phone;
     }
@@ -34,6 +42,7 @@ public class Order {
         this.phone = phone;
     }
 
+    @JsonProperty("address")
     public String getAddress() {
         return address;
     }
@@ -42,6 +51,7 @@ public class Order {
         this.address = address;
     }
 
+    @JsonProperty("bestellungen")
     public List<PizzaBestellung> getBestellungen() {
         return bestellungen;
     }

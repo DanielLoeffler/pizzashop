@@ -5,7 +5,9 @@ import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
 import ch.ti8m.azubi.lod.pizzashop.service.OrderServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.service.PizzaBestellungServiceImpl;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
 import freemarker.template.Template;
 
@@ -25,8 +27,9 @@ import java.util.Map;
 public class OrderServlet extends HttpServlet {
 
 
-    private PizzaServiceImpl pizzaService = new PizzaServiceImpl();
-    private OrderServiceImpl orderService = new OrderServiceImpl();
+    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
+    private OrderServiceImpl orderService = ServiceRegistry.getInstance().get(OrderServiceImpl.class);
+    private PizzaBestellungServiceImpl pizzaBestellungService = ServiceRegistry.getInstance().get(PizzaBestellungServiceImpl.class);
 
     private Template template;
 
@@ -92,18 +95,17 @@ public class OrderServlet extends HttpServlet {
         try {
             pricedouble = orderService.getPriceById(pizzaIDInt);
         } catch (NumberFormatException ex) {
-            throw new ServletException("pizza auswahl has error");
+            throw new ServletException("pizza preis has error");
         }
 
         Order creatOrder = orderService.createOrder(telString, addressString);
         creatOrder = orderService.makeOrder(creatOrder);
         double total = orderService.calculatePrice(pricedouble, anzahlInt);
-        PizzaBestellung pizzaBestellung = new PizzaBestellung(creatOrder.getId(), pizzaIDInt, anzahlInt, total);
-        orderService.createpizzaBestellung(pizzaBestellung);
-
+        PizzaBestellung pizzaBestellung = pizzaBestellungService.createPizzaBestellung(creatOrder.getId(), pizzaIDInt, anzahlInt, total);
+        pizzaBestellungService.makePizzaBestellung(pizzaBestellung);
 
         ObjectMapperFactory objectMapperFactory = new ObjectMapperFactory();
-        String json = objectMapperFactory.objectMapper().writeValueAsString(pizzaBestellung);
+        String jsonPizzaBestellung = objectMapperFactory.objectMapper().writeValueAsString(pizzaBestellung);
 
         resp.sendRedirect(req.getRequestURI() + "?order=" + creatOrder.getId());
     }

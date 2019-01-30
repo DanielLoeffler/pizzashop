@@ -1,7 +1,9 @@
 package ch.ti8m.azubi.lod.pizzashop.web;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
+import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
 import freemarker.template.Template;
 
@@ -21,6 +23,8 @@ public class PizzaServlet extends HttpServlet {
 
 
     private Template template;
+    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
+
 
     public void init() throws ServletException {
         template = new FreemarkerConfig().loadTemplate("pizzashop.ftl");
@@ -33,8 +37,6 @@ public class PizzaServlet extends HttpServlet {
 
 
         //PrintWriter writer = new PrintWriter(resp.getWriter());
-
-        PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
 
         try {
@@ -103,7 +105,6 @@ public class PizzaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        PizzaServiceImpl pizzaService = new PizzaServiceImpl();
 
         resp.setContentType("text/html");
         resp.setCharacterEncoding("UTF-8");
@@ -124,6 +125,9 @@ public class PizzaServlet extends HttpServlet {
 
         Pizza createPizza = pizzaService.createPizza(namecreate, priceCreateDouble);
         pizzaService.makePizza(createPizza);
+
+        ObjectMapperFactory objectMapperFactory = new ObjectMapperFactory();
+        String jsonPizza = objectMapperFactory.objectMapper().writeValueAsString(createPizza);
 
         resp.sendRedirect(req.getRequestURI());
     }

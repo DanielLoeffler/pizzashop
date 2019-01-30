@@ -19,8 +19,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public double calculatePrice(Double price, int anzahl) {
-        if (price == null && anzahl <= 0) {
-            throw new IllegalArgumentException("Preis und Anzahl nich vorhanden oder ungültig");
+        if (price == null) {
+            throw new IllegalArgumentException("Preis nich vorhanden oder ungültig");
+        }
+        if (anzahl <= 0) {
+            throw new IllegalArgumentException("Anzahl nich vorhanden oder ungültig");
         }
         double total = (price * anzahl);
         return total;

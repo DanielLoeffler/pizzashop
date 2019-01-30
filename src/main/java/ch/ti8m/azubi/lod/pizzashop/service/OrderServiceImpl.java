@@ -2,27 +2,22 @@ package ch.ti8m.azubi.lod.pizzashop.service;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
-import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.persistence.OrderDAO;
-import ch.ti8m.azubi.lod.pizzashop.persistence.OrderDAOJdbc;
-import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaBestellungDAO;
-import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaBestellungDAOJdbc;
 
 import java.util.List;
 
 
-public class OrderServiceImpl {
+public class OrderServiceImpl implements OrderService {
 
-    private OrderDAO orderDAO = new OrderDAOJdbc();
-    private PizzaBestellungDAO pizzaBestellungDAO = new PizzaBestellungDAOJdbc();
-
-    private PizzaServiceImpl pizzaService = new PizzaServiceImpl();
+    private OrderDAO orderDAO = ServiceRegistry.getInstance().get(OrderDAO.class);
+    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
 
 
     public OrderServiceImpl() {
 
     }
 
+    @Override
     public double calculatePrice(Double price, int anzahl) {
         if (price == null && anzahl <= 0) {
             throw new IllegalArgumentException("Preis und Anzahl nich vorhanden oder ungültig");
@@ -32,6 +27,7 @@ public class OrderServiceImpl {
 
     }
 
+    @Override
     public Order createOrder(String phone, String address) {
         if (phone == null) {
             throw new IllegalArgumentException("Phonel nich vorhanden");
@@ -42,6 +38,7 @@ public class OrderServiceImpl {
         return new Order(phone, address);
     }
 
+    @Override
     public Order makeOrder(Order order) {
         if (order == null) {
             throw new IllegalArgumentException("Order nich vorhanden");
@@ -50,27 +47,47 @@ public class OrderServiceImpl {
     }
 
 
+    @Override
     public double getPriceById(int id) {
         if (id <= 0) {
             throw new IllegalArgumentException("id nich vorhanden oder ungültig");
         }
         Pizza p = pizzaService.getPizzaByID(id);
-        double price = p.getPrice();
-
-        return price;
+        return p.getPrice();
 
     }
 
+    @Override
+    public Order getOrderByID(int i) {
+        if (i <= 0) {
+            throw new IllegalArgumentException("id nich vorhanden oder ungültig");
+        }
+        return orderDAO.getOrderByID(i);
+    }
+
+    @Override
+    public void updateOrderByID(Order o, int i) {
+        if (i <= 0) {
+            throw new IllegalArgumentException("id nich vorhanden oder ungültig");
+        }
+        if (o == null) {
+            throw new IllegalArgumentException("Order nich vorhanden");
+        }
+        orderDAO.update(o, i);
+    }
+
+    @Override
+    public void deleteOrderByID(int i) {
+        if (i <= 0) {
+            throw new IllegalArgumentException("id nich vorhanden oder ungültig");
+        }
+        orderDAO.delete(i);
+    }
+
+    @Override
     public List<Order> list() throws Exception {
         return orderDAO.getOrders();
     }
 
-
-    public void createpizzaBestellung(PizzaBestellung pizzaBestellung) {
-        if (pizzaBestellung == null) {
-            throw new IllegalArgumentException("PizzaBestellung nich vorhanden");
-        }
-        pizzaBestellungDAO.create(pizzaBestellung);
-    }
 
 }

@@ -6,7 +6,52 @@ import java.util.List;
 
 public interface OrderService {
 
-    List<Order> getOrders();
+    /**
+     * @param price  the price of one pizza
+     * @param anzahl the amount of one kinde of pizza
+     * @return the total Price of the Order
+     */
+    double calculatePrice(Double price, int anzahl);
 
-    void addOrder(Order order);
+    /**
+     * @param phone   the phonenummber of the Person
+     * @param address the addtess of the Person
+     * @return creates an Order and returns it
+     */
+    Order createOrder(String phone, String address);
+
+    /**
+     * @param order created Order added to DB
+     * @return returns Order to reuse if needed
+     */
+    Order makeOrder(Order order);
+
+    /**
+     * @param id ID of a Order
+     * @return Price of the requested order
+     */
+    double getPriceById(int id);
+
+    /**
+     * @param i ID of a Order
+     * @return Order of the requested order
+     */
+    Order getOrderByID(int i);
+
+    /**
+     * @param o Order to changed
+     * @param i ID of the Order to change
+     */
+    void updateOrderByID(Order o, int i);
+
+    /**
+     * @param i ID of Order to delete
+     */
+    void deleteOrderByID(int i);
+
+    /**
+     * @return Returns a list all Orders
+     * @throws Exception a exception for the list
+     */
+    List<Order> list() throws Exception;
 }

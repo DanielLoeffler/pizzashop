@@ -34,12 +34,12 @@ public interface OrderService {
 
     /**
      * @param i ID of a Order
-     * @return Order of the requested order
+     * @return Order of the requested Order
      */
     Order getOrderByID(int i);
 
     /**
-     * @param o Order to changed
+     * @param o Order to change
      * @param i ID of the Order to change
      */
     void updateOrderByID(Order o, int i);

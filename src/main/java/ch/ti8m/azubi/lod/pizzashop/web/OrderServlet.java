@@ -4,10 +4,7 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
-import ch.ti8m.azubi.lod.pizzashop.service.OrderServiceImpl;
-import ch.ti8m.azubi.lod.pizzashop.service.PizzaBestellungServiceImpl;
-import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
-import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
+import ch.ti8m.azubi.lod.pizzashop.service.*;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
 import freemarker.template.Template;
 
@@ -27,9 +24,9 @@ import java.util.Map;
 public class OrderServlet extends HttpServlet {
 
 
-    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
-    private OrderServiceImpl orderService = ServiceRegistry.getInstance().get(OrderServiceImpl.class);
-    private PizzaBestellungServiceImpl pizzaBestellungService = ServiceRegistry.getInstance().get(PizzaBestellungServiceImpl.class);
+    private PizzaService pizzaService = ServiceRegistry.getInstance().get(PizzaService.class);
+    private OrderService orderService = ServiceRegistry.getInstance().get(OrderService.class);
+    private PizzaBestellungService pizzaBestellungService = ServiceRegistry.getInstance().get(PizzaBestellungService.class);
 
     private Template template;
 

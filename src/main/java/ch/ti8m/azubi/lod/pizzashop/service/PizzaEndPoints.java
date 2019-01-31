@@ -9,7 +9,7 @@ import java.util.List;
 @Path("/pizza")
 public class PizzaEndPoints {
 
-    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
+    private PizzaService pizzaService = ServiceRegistry.getInstance().get(PizzaService.class);
 
     @GET
     @Path("/")

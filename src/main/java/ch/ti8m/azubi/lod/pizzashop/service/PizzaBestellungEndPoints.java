@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PizzaBestellungEndPoints {
 
-    private PizzaBestellungServiceImpl pizzaBestellungService = ServiceRegistry.getInstance().get(PizzaBestellungServiceImpl.class);
+    private PizzaBestellungService pizzaBestellungService = ServiceRegistry.getInstance().get(PizzaBestellungService.class);
 
     @GET
     @Path("/")

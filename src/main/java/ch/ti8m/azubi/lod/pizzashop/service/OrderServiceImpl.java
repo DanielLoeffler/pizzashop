@@ -10,7 +10,7 @@ import java.util.List;
 public class OrderServiceImpl implements OrderService {
 
     private OrderDAO orderDAO = ServiceRegistry.getInstance().get(OrderDAO.class);
-    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
+    private PizzaService pizzaService = ServiceRegistry.getInstance().get(PizzaService.class);
 
 
     public OrderServiceImpl() {

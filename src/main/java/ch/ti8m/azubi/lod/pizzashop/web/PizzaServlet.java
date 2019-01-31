@@ -2,7 +2,7 @@ package ch.ti8m.azubi.lod.pizzashop.web;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
 import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
-import ch.ti8m.azubi.lod.pizzashop.service.PizzaServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.service.PizzaService;
 import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
 import freemarker.template.Template;
@@ -23,7 +23,7 @@ public class PizzaServlet extends HttpServlet {
 
 
     private Template template;
-    private PizzaServiceImpl pizzaService = ServiceRegistry.getInstance().get(PizzaServiceImpl.class);
+    private PizzaService pizzaService = ServiceRegistry.getInstance().get(PizzaService.class);
 
 
     public void init() throws ServletException {

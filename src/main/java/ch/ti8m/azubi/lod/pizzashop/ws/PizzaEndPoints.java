@@ -1,6 +1,8 @@
-package ch.ti8m.azubi.lod.pizzashop.service;
+package ch.ti8m.azubi.lod.pizzashop.ws;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
+import ch.ti8m.azubi.lod.pizzashop.service.PizzaService;
+import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,6 +18,15 @@ public class PizzaEndPoints {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Pizza> list() throws Exception {
         return pizzaService.list();
+    }
+
+    @POST
+    @Path("/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Pizza createPizza(Pizza pizza) {
+        pizzaService.makePizza(pizza);
+        return pizza;
     }
 
     @GET

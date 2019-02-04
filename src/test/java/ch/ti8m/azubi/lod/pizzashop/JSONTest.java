@@ -4,6 +4,7 @@ import ch.ti8m.azubi.lod.pizzashop.dto.PizzaBestellung;
 import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -21,6 +22,7 @@ public class JSONTest {
     }
 
     @Test
+    @Ignore
     public void setObjectMapperFactoryTest() throws JsonProcessingException {
         String json = objectMapperFactory.objectMapper().writeValueAsString(pizzaBestellung);
         assertEquals("{\n" +

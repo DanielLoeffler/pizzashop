@@ -1,35 +1,35 @@
 package ch.ti8m.azubi.lod.pizzashop.dto;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Pizza {
 
+    @JsonProperty("id")
     private Integer id;
+
+    @JsonProperty("name")
     private String name;
+
+    @JsonProperty("price")
     private Double price;
 
-    @JsonCreator
     public Pizza() {
     }
 
-    @JsonCreator
     public Pizza(Integer id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    @JsonCreator
     public Pizza(String name, Double price) {
         this.name = name;
         this.price = price;
     }
 
 
-    @JsonProperty("id")
     public Integer getId() {
         return id;
     }
@@ -38,7 +38,6 @@ public class Pizza {
         this.id = id;
     }
 
-    @JsonProperty("name")
     public String getName() {
         return name;
     }
@@ -47,7 +46,6 @@ public class Pizza {
         this.name = name;
     }
 
-    @JsonProperty("price")
     public Double getPrice() {
         return price;
     }

@@ -150,7 +150,7 @@
                 </nav>
 
                 <article>
-                    <h1>Zur auswahl stehen folgende Sorten mit dem Preis f&uumlr die Kleine Pizza</h1>
+                    <h1>Zur auswahl stehen folgende Sorten mit dem Preis f&uuml;r die Kleine Pizza</h1>
                     <p>
                         <#if pizzas??>
                             <table>
@@ -164,7 +164,8 @@
                             </table>
                         <#else>
                             Es sind keine Pizzas gespeichert
-                        </#if></p>
+                        </#if>
+                    </p>
                 </article>
             </section>
 

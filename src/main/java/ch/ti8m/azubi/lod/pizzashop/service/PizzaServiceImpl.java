@@ -61,14 +61,14 @@ public class PizzaServiceImpl implements PizzaService {
     }
 
     @Override
-    public void updatePizzaByID(Pizza p, int i) {
+    public void updatePizza(Pizza p) {
         if (p == null) {
             throw new IllegalArgumentException("Pizza nich vorhanden oder ungültig");
         }
-        if (i < 0) {
+        if (p.getId() == null) {
             throw new IllegalArgumentException("ID nich vorhanden oder ungültig");
         }
-        pizzaDAO.update(p, i);
+        pizzaDAO.update(p, p.getId());
     }
 
     @Override

@@ -1,30 +1,31 @@
 package ch.ti8m.azubi.lod.pizzashop.ws;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
-import ch.ti8m.azubi.lod.pizzashop.service.OrderServiceImpl;
+import ch.ti8m.azubi.lod.pizzashop.service.OrderService;
 import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
-@Path("order")
+@Path("/order")
 public class OrderEndPoints {
 
-    private OrderServiceImpl orderService = ServiceRegistry.getInstance().get(OrderServiceImpl.class);
+    private OrderService orderService = ServiceRegistry.getInstance().get(OrderService.class);
 
     @GET
-    @Path("/")
+    //@Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Order> list() throws Exception {
         return orderService.list();
     }
 
-    @GET
-    @Path("/")
+    @POST
+    //@Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Order createOrdrr(Order order) {
+    public Order createOrder(Order order) {
+        order.setId(null);
         orderService.makeOrder(order);
         return order;
     }

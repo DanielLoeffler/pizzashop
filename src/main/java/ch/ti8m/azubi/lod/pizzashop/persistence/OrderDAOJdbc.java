@@ -3,10 +3,7 @@ package ch.ti8m.azubi.lod.pizzashop.persistence;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Order;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -34,11 +31,11 @@ public class OrderDAOJdbc implements OrderDAO {
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery("select * from bestellung;");
             while (resultSet.next()) {
-                //int id = resultSet.getInt("id");
+                int id = resultSet.getInt("id");
                 //Date date = resultSet.getDate("date");
                 String phone = resultSet.getString("phone");
                 String address = resultSet.getString("address");
-                orders.add(new Order(phone, address));
+                orders.add(new Order(id, phone, address));
             }
         }
 
@@ -49,23 +46,25 @@ public class OrderDAOJdbc implements OrderDAO {
      * Get the order with the given id. If no such person is found, null is
      * returned.
      */
-    @Override
-    public Order getOrderByID(int id) {
-        Order order = null;
 
-        try (Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("select * from bestellung where id = " + id + ";");
+    @Override
+    public Order getOrderByID(Integer id) {
+        Order order = null;
+        String query = "select * from bestellung where id = ? ;";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
             int tempID = resultSet.getInt("id");
             Date date = resultSet.getDate("date");
             String phone = resultSet.getString("phone");
             String address = resultSet.getString("address");
 
-            //order = new Order(tempID, date, phone, address);
+            order = new Order(tempID, phone, address);
         } catch (SQLException e) {
             throw new RuntimeException("Order wurde nicht gefunden: " + e.getMessage());
         }
-
         return order;
     }
 
@@ -73,16 +72,18 @@ public class OrderDAOJdbc implements OrderDAO {
     /**
      * Create a new order.
      */
-    @Override
-    public Order create(Order order) {
 
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("insert into bestellung (phone, address) values(" + order.getPhone() + ", " + order.getPhone() + ");", statement.RETURN_GENERATED_KEYS);
-            ResultSet generatedKeys = statement.getGeneratedKeys();
-            generatedKeys.next();
-            int id = generatedKeys.getInt(1);
+    @Override
+    public void create(Order order) {
+
+        String query = "insert into bestellung (phone, address) values( ? , ? );";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, order.getPhone());
+            preparedStatement.setString(2, order.getAddress());
+            int id = preparedStatement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
             order.setId(id);
-            return order;
+
         } catch (SQLException e) {
             throw new RuntimeException("Fehlre beim Erstellen der Order: " + e.getMessage());
         }
@@ -91,29 +92,38 @@ public class OrderDAOJdbc implements OrderDAO {
     /**
      * Update a order
      */
-    @Override
-    public void update(Order order, int id) {
 
-        try (Statement statement = connection.createStatement()) {
-            //statement.executeUpdate("update bestellung set id="+order.getId()+", date="+order.getDate()+", phone="+order.getPhone()+", address="+order.getAddress()+" where id="+id+";");
+    @Override
+    public void update(Order order, Integer id) {
+        String query = "update bestellung set id= ? , phone= ? , address= ?  where id= ? ;";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, order.getId());
+            preparedStatement.setString(2, order.getPhone());
+            preparedStatement.setString(3, order.getAddress());
+            preparedStatement.setInt(4, id);
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
             throw new RuntimeException("Fehler beim Update der Order: " + e.getMessage());
         }
-
     }
 
 
     /**
      * Delete a order by id.
      */
-    @Override
-    public void delete(int id) {
 
-        try (Statement statement = connection.createStatement()) {
-            statement.executeUpdate("delete from bestellung where id=" + id + ";");
+    @Override
+    public void delete(Integer id) {
+        String query = "delete from pizza where id= ? ;";
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+
         } catch (SQLException e) {
-            throw new RuntimeException("Fehler beim Löschen der order: " + e.getMessage());
+            throw new RuntimeException("Fehler beim Löschen der Order: " + e.getMessage());
         }
     }
-
 }

@@ -24,30 +24,30 @@ public interface OrderService {
      * @param order created Order added to DB
      * @return returns Order to reuse if needed
      */
-    Order makeOrder(Order order);
+    void makeOrder(Order order);
 
     /**
      * @param id ID of a Order
      * @return Price of the requested order
      */
-    double getPriceById(int id);
+    double getPriceById(Integer id);
 
     /**
      * @param i ID of a Order
      * @return Order of the requested Order
      */
-    Order getOrderByID(int i);
+    Order getOrderByID(Integer i);
 
     /**
      * @param o Order to change
      * @param i ID of the Order to change
      */
-    void updateOrderByID(Order o, int i);
+    void updateOrderByID(Order o, Integer i);
 
     /**
      * @param i ID of Order to delete
      */
-    void deleteOrderByID(int i);
+    void deleteOrderByID(Integer i);
 
     /**
      * @return Returns a list all Orders

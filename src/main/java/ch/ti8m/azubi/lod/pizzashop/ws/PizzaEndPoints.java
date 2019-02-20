@@ -14,17 +14,18 @@ public class PizzaEndPoints {
     private PizzaService pizzaService = ServiceRegistry.getInstance().get(PizzaService.class);
 
     @GET
-    @Path("/")
+    //@Path("/")
     @Produces(MediaType.APPLICATION_JSON)
     public List<Pizza> list() throws Exception {
         return pizzaService.list();
     }
 
     @POST
-    @Path("/")
+    //@Path("/")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Pizza createPizza(Pizza pizza) {
+        pizza.setId(null);
         pizzaService.makePizza(pizza);
         return pizza;
     }
@@ -40,8 +41,9 @@ public class PizzaEndPoints {
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void updatePizzaByID(Pizza p, @PathParam("id") int x) {
-        pizzaService.updatePizzaByID(p, x);
+    public void updatePizzaByID(Pizza pizza, @PathParam("id") int id) {
+        pizza.setId(id);
+        pizzaService.updatePizza(pizza);
     }
 
     //not in Use

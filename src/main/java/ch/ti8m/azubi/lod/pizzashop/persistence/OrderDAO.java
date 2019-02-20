@@ -17,22 +17,22 @@ public interface OrderDAO {
      * @param id ID of a Order
      * @return Order of the requested Order
      */
-    Order getOrderByID(int id);
+    Order getOrderByID(Integer id);
 
     /**
      * @param order creates Order
      * @return returns Order to reuse if needed
      */
-    Order create(Order order);
+    void create(Order order);
 
     /**
      * @param order Order to change
      * @param id    ID of the Order to change
      */
-    void update(Order order, int id);
+    void update(Order order, Integer id);
 
     /**
      * @param id ID of Order to delete
      */
-    void delete(int id);
+    void delete(Integer id);
 }

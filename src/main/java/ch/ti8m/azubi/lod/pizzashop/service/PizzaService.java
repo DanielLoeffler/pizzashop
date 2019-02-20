@@ -38,9 +38,8 @@ public interface PizzaService {
 
     /**
      * @param p Pizza to change
-     * @param i ID of Pizza to change
      */
-    void updatePizzaByID(Pizza p, int i);
+    void updatePizza(Pizza p);
 
     /**
      * @param i ID of Pizza to delete

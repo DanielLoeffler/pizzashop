@@ -14,12 +14,11 @@ public class ServiceRegistry {
     private final Map<Class<?>, Object> services = new HashMap<>();
 
     private ServiceRegistry() {
-        mappings.put(PizzaBestellungService.class, PizzaBestellungServiceImpl.class);
         mappings.put(PizzaService.class, PizzaServiceImpl.class);
         mappings.put(OrderService.class, OrderServiceImpl.class);
         mappings.put(PizzaDAO.class, PizzaDAOJdbc.class);
         mappings.put(OrderDAO.class, OrderDAOJdbc.class);
-        mappings.put(PizzaBestellungDAO.class, PizzaBestellungDAOJdbc.class);
+        mappings.put(PizzaOrderDAO.class, PizzaOrderDAOJdbc.class);
 
     }
 

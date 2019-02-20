@@ -48,8 +48,6 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
         String query = "select * from pizza where id = ? ;";
 
-        // PreparedStatement preparedStatement = connection.prepareStatement(query);
-        // preparedStatement.setInt(query,idnum);
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
@@ -71,16 +69,6 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
     /**
      * Create a new pizza.
-     *
-     * @Override public void create(Pizza pizza) {
-     * <p>
-     * try (Statement statement = connection.createStatement()) {
-     * statement.executeUpdate("insert into pizza (id, name, price) values(" + pizza.getId() + ", " + pizza.getName() + ", " + pizza.getPrice() + ");");
-     * <p>
-     * } catch (SQLException e) {
-     * System.out.println("Fehlre beim Erstellen der Pizza: " + e.getMessage());
-     * }
-     * }
      */
 
     @Override
@@ -102,16 +90,6 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
     /**
      * Update a pizza
-     *
-     * @Override public void update(Pizza pizza, int id) {
-     * <p>
-     * try(Statement statement=connection.createStatement()) {
-     * statement.executeUpdate("update pizza set id="+pizza.getId()+", name="+pizza.getName()+", price="+pizza.getPrice()+" where id="+id+";");
-     * } catch (SQLException e) {
-     * System.out.println("Fehler beim Update der Pizza: "+e.getMessage());
-     * }
-     * <p>
-     * }
      */
 
     @Override
@@ -135,15 +113,6 @@ public class PizzaDAOJdbc implements PizzaDAO {
 
     /**
      * Delete a pizza by id.
-     *
-     * @Override public void delete(int id)  {
-     * <p>
-     * try(Statement statement=connection.createStatement()) {
-     * statement.executeUpdate("delete from pizza where id="+id+";");
-     * } catch (SQLException e) {
-     * System.out.println("Fehler beim Löschen der Pizza: "+e.getMessage());
-     * }
-     * }
      */
 
     @Override

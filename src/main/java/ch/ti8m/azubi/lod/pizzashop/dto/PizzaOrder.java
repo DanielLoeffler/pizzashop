@@ -4,11 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PizzaBestellung {
-
-
-    @JsonProperty("bestellung_id")
-    private Integer bestellung_id;
+public class PizzaOrder {
 
     @JsonProperty("pizza_id")
     private Integer pizza_id;
@@ -19,24 +15,14 @@ public class PizzaBestellung {
     @JsonProperty("preis")
     private double preis;
 
-    public PizzaBestellung() {
+    public PizzaOrder() {
 
     }
 
-    public PizzaBestellung(Integer bestellung_id, Integer pizza_id, Integer anzahl, double preis) {
-        this.bestellung_id = bestellung_id;
+    public PizzaOrder(Integer pizza_id, Integer anzahl, double preis) {
         this.pizza_id = pizza_id;
         this.anzahl = anzahl;
         this.preis = preis;
-    }
-
-
-    public Integer getBestellung_id() {
-        return bestellung_id;
-    }
-
-    public void setBestellung_id(Integer bestellung_id) {
-        this.bestellung_id = bestellung_id;
     }
 
     public Integer getPizza_id() {

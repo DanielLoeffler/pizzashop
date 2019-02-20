@@ -1,10 +1,10 @@
 package ch.ti8m.azubi.lod.pizzashop.web;
 
 import ch.ti8m.azubi.lod.pizzashop.dto.Pizza;
-import ch.ti8m.azubi.lod.pizzashop.persistence.ObjectMapperFactory;
 import ch.ti8m.azubi.lod.pizzashop.service.PizzaService;
 import ch.ti8m.azubi.lod.pizzashop.service.ServiceRegistry;
 import ch.ti8m.azubi.lod.pizzashop.template.FreemarkerConfig;
+import ch.ti8m.azubi.lod.pizzashop.webservice.config.ObjectMapperFactory;
 import freemarker.template.Template;
 
 import javax.servlet.ServletException;
@@ -36,9 +36,6 @@ public class PizzaServlet extends HttpServlet {
         resp.setContentType("text/html");
 
 
-        //PrintWriter writer = new PrintWriter(resp.getWriter());
-
-
         try {
             List<Pizza> pizzas = pizzaService.list();
             PrintWriter writer = resp.getWriter();
@@ -49,56 +46,6 @@ public class PizzaServlet extends HttpServlet {
             e.printStackTrace();
             throw new IOException(e);
         }
-
-
-
-
-
-/*
-        if (id != null) {
-            try {
-                idInt = pizzaService.idToInt(id);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if (idInt >= 1) {
-            pizza = pizzaService.getPizzaByID(idInt);
-
-        } else {
-            pizza = "Keine Negativen IDs.";
-        }
-
-
-        if (idcreate != null) {
-            try {
-                idCreateInt = pizzaService.idToInt(id);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if (namecreate != null) {
-            try {
-                nameCreateString = namecreate;
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-
-
-        if (pricecreate != null) {
-            try {
-                priceCreateDouble = pizzaService.priceToDouble(pricecreate);
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
-
-*/
 
     }
 

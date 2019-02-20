@@ -1,4 +1,4 @@
-package ch.ti8m.azubi.lod.pizzashop.persistence;
+package ch.ti8m.azubi.lod.pizzashop.webservice.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

@@ -11,7 +11,7 @@ import java.util.List;
 public class Order {
 
     @JsonProperty("id")
-    private int id;
+    private Integer id;
 
     @JsonProperty("phone")
     private String phone;
@@ -20,11 +20,17 @@ public class Order {
     private String address;
 
     @JsonProperty("bestellungen")
-    private List<PizzaBestellung> bestellungen = new LinkedList<>();
+    private List<PizzaOrder> bestellungen = new LinkedList<>();
 
 
     public Order() {
 
+    }
+
+    public Order(Integer id, String phone, String address) {
+        this.id = id;
+        this.phone = phone;
+        this.address = address;
     }
 
     public Order(String phone, String address) {
@@ -33,11 +39,11 @@ public class Order {
     }
 
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -57,19 +63,12 @@ public class Order {
         this.address = address;
     }
 
-    public List<PizzaBestellung> getBestellungen() {
+    public List<PizzaOrder> getBestellungen() {
         return bestellungen;
     }
 
-    public void setBestellungen(List<PizzaBestellung> bestellungen) {
+    public void setBestellungen(List<PizzaOrder> bestellungen) {
         this.bestellungen = bestellungen;
     }
 
-
-    /*
-    @Override
-    public String toString() {
-        return phone + ", " + address;
-    }
-    */
 }

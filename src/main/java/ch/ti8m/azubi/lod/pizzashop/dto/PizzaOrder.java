@@ -3,6 +3,12 @@ package ch.ti8m.azubi.lod.pizzashop.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * A PizzaOrder witch connects Pizza and Order
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class PizzaOrder {
 

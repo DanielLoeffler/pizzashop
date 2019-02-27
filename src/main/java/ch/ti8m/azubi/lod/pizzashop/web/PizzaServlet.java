@@ -18,6 +18,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Connection between the Web and the backend
+ */
 @WebServlet("/pizza")
 public class PizzaServlet extends HttpServlet {
 

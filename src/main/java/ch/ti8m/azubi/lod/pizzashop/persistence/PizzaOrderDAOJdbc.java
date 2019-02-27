@@ -6,6 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Connection to the PizzaOrder class in the DB
+ */
 public class PizzaOrderDAOJdbc implements PizzaOrderDAO {
 
     private Connection connection;
@@ -22,7 +27,7 @@ public class PizzaOrderDAOJdbc implements PizzaOrderDAO {
      * Return a list of all orders.
      */
     @Override
-    public List<PizzaOrder> getPizzaBestellungen(long bestellungsId) throws Exception {
+    public List<PizzaOrder> getPizzaOrder(long bestellungsId) throws Exception {
         List<PizzaOrder> pizzaOrders = new ArrayList<>();
 
         try (Statement statement = connection.createStatement()) {
@@ -46,7 +51,7 @@ public class PizzaOrderDAOJdbc implements PizzaOrderDAO {
      */
 
     @Override
-    public PizzaOrder getPizzzaBestellungByID(Integer id) {
+    public PizzaOrder getPizzzaOrderByID(Integer id) {
         PizzaOrder pizzaOrder = null;
 
         String query = "select * from pizza_bestellung where id = ? ;";

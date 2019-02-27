@@ -8,6 +8,11 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Endpoints for the Pizzas
+ */
 @Path("/pizza")
 public class PizzaEndPoints {
 

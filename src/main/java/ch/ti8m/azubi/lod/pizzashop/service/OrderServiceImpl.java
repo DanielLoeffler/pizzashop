@@ -8,7 +8,11 @@ import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaOrderDAO;
 
 import java.util.List;
 
-
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Order Service to interact between Servlets and DAO and to changes Information from the Servlets
+ */
 public class OrderServiceImpl implements OrderService {
 
     private OrderDAO orderDAO = ServiceRegistry.getInstance().get(OrderDAO.class);

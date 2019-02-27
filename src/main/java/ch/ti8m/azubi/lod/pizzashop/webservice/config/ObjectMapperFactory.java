@@ -7,6 +7,10 @@ import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.util.StdDateFormat;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ */
 public class ObjectMapperFactory {
 
     public ObjectMapper objectMapper() {

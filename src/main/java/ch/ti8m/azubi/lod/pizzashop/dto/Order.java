@@ -7,6 +7,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.LinkedList;
 import java.util.List;
 
+
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * A Order
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Order {
 

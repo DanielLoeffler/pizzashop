@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * ConnectionFactory to connect to the DB
+ */
 public class ConnectionFactory {
 
 

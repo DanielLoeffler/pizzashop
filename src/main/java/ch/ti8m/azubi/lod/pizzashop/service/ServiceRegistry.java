@@ -6,6 +6,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Registry to avoid multiple connection to another Class
+ */
 public class ServiceRegistry {
 
     private static ServiceRegistry instance;

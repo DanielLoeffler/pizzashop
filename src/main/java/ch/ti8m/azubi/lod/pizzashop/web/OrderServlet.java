@@ -22,7 +22,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Connection between the Web and the backend
+ */
 @WebServlet("/order")
 public class OrderServlet extends HttpServlet {
 
@@ -80,13 +84,13 @@ public class OrderServlet extends HttpServlet {
         double pricedouble;
 
         try {
-            anzahlInt = pizzaService.idToInt(anzahlString);
+            anzahlInt = pizzaService.stringToInt(anzahlString);
         } catch (NumberFormatException ex) {
             throw new ServletException("pizza anzahl is required and must be a number");
         }
 
         try {
-            pizzaIDInt = pizzaService.idToInt(pizzaIDString);
+            pizzaIDInt = pizzaService.stringToInt(pizzaIDString);
         } catch (NumberFormatException ex) {
             throw new ServletException("pizza auswahl has error");
         }

@@ -6,7 +6,11 @@ import ch.ti8m.azubi.lod.pizzashop.persistence.PizzaDAO;
 
 import java.util.List;
 
-
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Pizza Service to interact between Servlets and DAO and to changes Information from the Servlets
+ */
 public class PizzaServiceImpl implements PizzaService {
 
 
@@ -14,7 +18,7 @@ public class PizzaServiceImpl implements PizzaService {
 
 
     @Override
-    public int idToInt(String x) {
+    public int stringToInt(String x) {
         if (x == null) {
             throw new IllegalArgumentException("ID nich vorhanden oder ungültig");
         }

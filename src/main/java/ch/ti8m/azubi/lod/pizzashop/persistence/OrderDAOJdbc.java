@@ -8,6 +8,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Connection to the Order class in the DB
+ */
 public class OrderDAOJdbc implements OrderDAO {
 
     private Connection connection;

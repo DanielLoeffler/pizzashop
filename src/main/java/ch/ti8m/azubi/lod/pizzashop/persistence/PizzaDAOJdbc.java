@@ -6,6 +6,11 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Daniel Löffler
+ * @since 27.02.2019
+ * Connection to the Pizza class in the DB
+ */
 public class PizzaDAOJdbc implements PizzaDAO {
 
     private Connection connection;
